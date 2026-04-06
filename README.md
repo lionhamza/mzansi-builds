@@ -66,7 +66,7 @@ MzansiBuilds solves this by providing a platform where developers can:
 
 ### Database
 
-* SQLite
+* Postgreql
 
 ### Testing
 
