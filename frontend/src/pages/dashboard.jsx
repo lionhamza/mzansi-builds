@@ -1,59 +1,63 @@
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import "./Dashboard.css";
+
 function Dashboard() {
+  const navigate = useNavigate();
+
+  const cards = [
+    {
+      title: "Create Project",
+      text: "Start a new project and share it with the community.",
+      route: "/create-project",
+      icon: "🚀",
+    },
+    {
+      title: "Developer Feed",
+      text: "See what other developers are building.",
+      route: "/feed",
+      icon: "💬",
+    },
+    {
+      title: "My Projects",
+      text: "Manage and update your active projects.",
+      route: "/my-projects",
+      icon: "📁",
+    },
+    {
+      title: "Celebration Wall",
+      text: "See completed projects from the community.",
+      route: "/celebration",
+      icon: "🎉",
+    },
+  ];
+
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>MzansiBuilds Dashboard</h1>
-      <p style={styles.subheading}>Build in public. Grow together.</p>
+    <>
+      <Header />
 
-      <div style={styles.grid}>
-        <div style={styles.card}>
-          <h2>Create Project</h2>
-          <p>Start a new project and share it with the community.</p>
+      <div className="dashboard">
+        <div className="hero">
+          <h2>Welcome back, Hamza 👋</h2>
+          <p>Build in public. Collaborate. Celebrate progress.</p>
         </div>
 
-        <div style={styles.card}>
-          <h2>Developer Feed</h2>
-          <p>See what other developers are building.</p>
-        </div>
-
-        <div style={styles.card}>
-          <h2>My Projects</h2>
-          <p>Manage and update your active projects.</p>
-        </div>
-
-        <div style={styles.card}>
-          <h2>Celebration Wall 🎉</h2>
-          <p>See completed projects from the community.</p>
+        <div className="grid">
+          {cards.map((card, index) => (
+            <div
+              key={index}
+              className="card"
+              onClick={() => navigate(card.route)}
+            >
+              <div className="icon">{card.icon}</div>
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }
-
-const styles = {
-  container: {
-    minHeight: "100vh",
-    backgroundColor: "#000",
-    color: "#fff",
-    padding: "40px"
-  },
-  heading: {
-    color: "#00ff88",
-    marginBottom: "10px"
-  },
-  subheading: {
-    marginBottom: "30px"
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gap: "20px"
-  },
-  card: {
-    backgroundColor: "#111",
-    padding: "20px",
-    borderRadius: "12px",
-    border: "1px solid #00ff88"
-  }
-};
 
 export default Dashboard;

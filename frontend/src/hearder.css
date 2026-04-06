@@ -1,0 +1,56 @@
+.header {
+  height: 70px;
+  background: #0b0b0b;
+  border-bottom: 1px solid #1f1f1f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  color: white;
+}
+
+.brand {
+  font-size: 26px;
+  font-weight: bold;
+  color: #00ff88;
+  cursor: pointer;
+}
+
+.profile-area {
+  position: relative;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #00ff88;
+}
+
+.dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  width: 180px;
+  background: #151515;
+  border: 1px solid #00ff88;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.dropdown div {
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown div:hover {
+  background: #1f1f1f;
+}
+
+.logout {
+  color: #ff4d4d;
+  font-weight: bold;
+}

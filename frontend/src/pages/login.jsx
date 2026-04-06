@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import "../index.css";
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -26,9 +27,9 @@ function Login() {
   };
 
   return (
-    <div className="container">
-      <div className="card">
-        <h2 style={{ textAlign: "center", color: "#0f5132" }}>Login</h2>
+    <div className="auth-page">
+      <div className="auth-card">
+        <h2>Login</h2>
 
         <form onSubmit={handleSubmit}>
           <input
@@ -50,15 +51,10 @@ function Login() {
           <button type="submit">Login</button>
         </form>
 
-        {message && (
-          <p style={{ marginTop: "15px", textAlign: "center" }}>{message}</p>
-        )}
+        {message && <p className="auth-message">{message}</p>}
 
-        <p style={{ marginTop: "15px", textAlign: "center" }}>
-          Don’t have an account?{" "}
-          <Link to="/register" style={{ color: "#198754", fontWeight: "bold" }}>
-            Register here
-          </Link>
+        <p className="auth-link">
+          Don’t have an account? <Link to="/register">Register here</Link>
         </p>
       </div>
     </div>
