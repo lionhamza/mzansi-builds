@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
 
@@ -12,6 +14,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const res = await fetch("http://127.0.0.1:5000/auth/login", {
         method: "POST",
@@ -20,7 +23,14 @@ function Login() {
       });
 
       const data = await res.json();
-      setMessage(data.message || data.error);
+
+      if (res.ok) {
+        // ✅ SAVE USER SESSION
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/dashboard");
+      } else {
+        setMessage(data.error || "Login failed");
+      }
     } catch (err) {
       setMessage("Error connecting to server");
     }
@@ -55,7 +65,7 @@ function Login() {
 
         <p className="auth-link">
           Don’t have an account? <Link to="/register">Register here</Link>
-        </p>
+        </p> 
       </div>
     </div>
   );

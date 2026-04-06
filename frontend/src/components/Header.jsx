@@ -7,6 +7,9 @@ function Header() {
   const menuRef = useRef();
   const navigate = useNavigate();
 
+  // ✅ get logged in user
+  const user = JSON.parse(localStorage.getItem("user"));
+
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -16,6 +19,12 @@ function Header() {
     document.addEventListener("click", handler);
     return () => document.removeEventListener("click", handler);
   }, []);
+
+  // ✅ real logout
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
 
   return (
     <div className="header">
@@ -35,7 +44,11 @@ function Header() {
           <div className="dropdown">
             <div onClick={() => navigate("/profile")}>My Profile</div>
             <div onClick={() => navigate("/my-projects")}>My Projects</div>
-            <div className="logout">Logout</div>
+
+            {/* ✅ fixed logout */}
+            <div className="logout" onClick={handleLogout}>
+              Logout
+            </div>
           </div>
         )}
       </div>

@@ -1,17 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/dashboard";
+import CreateProject from "./pages/CreateProject";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />          {/* Default page is Login */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/create-project" element={<CreateProject />} />
+      <Route path="/register" element={<Register/>}/>
+    </Routes>
   );
 }
 

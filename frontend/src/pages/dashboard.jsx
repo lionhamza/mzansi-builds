@@ -5,6 +5,13 @@ import "./Dashboard.css";
 function Dashboard() {
   const navigate = useNavigate();
 
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
+  if (!user) {
+    return <div>Please login again.</div>;
+  }
+
   const cards = [
     {
       title: "Create Project",
@@ -38,7 +45,7 @@ function Dashboard() {
 
       <div className="dashboard">
         <div className="hero">
-          <h2>Welcome back, Hamza 👋</h2>
+          <h2>Welcome back, {user.full_name} 👋</h2>
           <p>Build in public. Collaborate. Celebrate progress.</p>
         </div>
 
@@ -59,5 +66,4 @@ function Dashboard() {
     </>
   );
 }
-
 export default Dashboard;

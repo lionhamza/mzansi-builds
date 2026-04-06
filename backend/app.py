@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from app.models.user import db
+from app.extensions import db
 from app.routes.auth_routes import auth_bp
+from app.routes.project import project_bp
 
 app = Flask(__name__)
 CORS(app)
@@ -12,6 +13,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
 app.register_blueprint(auth_bp, url_prefix="/auth")
+app.register_blueprint(project_bp)
 
 with app.app_context():
     db.create_all()

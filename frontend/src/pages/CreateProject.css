@@ -1,0 +1,67 @@
+.create-wrapper {
+  min-height: 100vh;
+  background: #0b0b0b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.create-card {
+  width: 600px;
+  background: #151515;
+  border: 1px solid #00ff88;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 12px 30px rgba(0, 255, 136, 0.15);
+  color: white;
+}
+
+.create-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #00ff88;
+}
+
+.create-card input,
+.create-card textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  background: #0f0f0f;
+  color: white;
+  outline: none;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.create-card input:focus,
+.create-card textarea:focus {
+  border: 1px solid #00ff88;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
+
+.create-card button {
+  width: 100%;
+  padding: 14px;
+  background: #00ff88;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.create-card button:hover {
+  opacity: 0.9;
+}
+
+.success-msg {
+  margin-top: 20px;
+  text-align: center;
+  color: #00ff88;
+  font-weight: bold;
+}

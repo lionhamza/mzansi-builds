@@ -10,7 +10,6 @@ def register():
     email = data.get("email")
     password = data.get("password")
 
-    # Check if user exists
     if User.query.filter_by(email=email).first():
         return jsonify({"error": "User already exists"}), 400
 
@@ -18,7 +17,8 @@ def register():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"message": f"{full_name} registered successfully!"})
+    return jsonify({"message": f"{full_name} registered successfully!"}), 201
+
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
@@ -30,4 +30,11 @@ def login():
     if not user:
         return jsonify({"error": "Invalid credentials"}), 401
 
-    return jsonify({"message": f"Welcome {user.full_name}!"})
+    return jsonify({
+        "message": f"Welcome {user.full_name}!",
+        "user": {
+            "id": user.id,
+            "full_name": user.full_name,
+            "email": user.email,
+        }
+    }), 200
