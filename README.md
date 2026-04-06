@@ -160,5 +160,5 @@ All system design decisions, implementation logic, and engineering choices were 
 ## 👨‍💻 About Me
 
 **Hamza Madi**
-Final-year Computer Science & IT
+Computer Science & IT Graduate
 University of KwaZulu-Natal
