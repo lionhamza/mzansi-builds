@@ -1,7 +1,3 @@
-Here’s your README rewritten in **first person**, keeping it professional but personal:
-
----
-
 # MzansiBuilds 🚀
 
 MzansiBuilds is my platform that allows me, and other developers, to **build in public**, share progress, collaborate, and celebrate completed projects.
