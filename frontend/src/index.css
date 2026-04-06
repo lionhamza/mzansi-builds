@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+}
+
+
+/* Page background */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5fff7;
+
+  /* CENTER EVERYTHING */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Main container for pages */
+.container {
+  width: 100%;
+  max-width: 450px;
+}
+
+/* Card style */
+.card {
+  background: white;
+  border: 2px solid #0f5132;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Headings */
+h2 {
+  margin-top: 0;
+}
+
+/* Inputs & Textareas (modern look) */
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 2px solid #d9e7dd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f9fffb;
+  outline: none;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+  color: #8aa39a;
+}
+
+/* Focus effect */
+input:focus,
+textarea:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
+  background: #ffffff;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #198754;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* Button hover */
+button:hover {
+  background: #157347;
+  transform: translateY(-1px);
+}

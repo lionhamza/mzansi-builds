@@ -1,0 +1,33 @@
+from flask import Blueprint, request, jsonify
+from app.models.user import User, db
+
+auth_bp = Blueprint("auth", __name__)
+
+@auth_bp.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()
+    full_name = data.get("full_name")
+    email = data.get("email")
+    password = data.get("password")
+
+    # Check if user exists
+    if User.query.filter_by(email=email).first():
+        return jsonify({"error": "User already exists"}), 400
+
+    new_user = User(full_name=full_name, email=email, password=password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({"message": f"{full_name} registered successfully!"})
+
+@auth_bp.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    email = data.get("email")
+    password = data.get("password")
+
+    user = User.query.filter_by(email=email, password=password).first()
+    if not user:
+        return jsonify({"error": "Invalid credentials"}), 401
+
+    return jsonify({"message": f"Welcome {user.full_name}!"})
