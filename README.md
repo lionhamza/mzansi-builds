@@ -1,19 +1,23 @@
+Here’s your README rewritten in **first person**, keeping it professional but personal:
+
+---
+
 # MzansiBuilds 🚀
 
-MzansiBuilds is a platform that enables developers to **build in public**, share their progress, collaborate with other developers, and celebrate completed projects.
+MzansiBuilds is my platform that allows me, and other developers, to **build in public**, share progress, collaborate, and celebrate completed projects.
 
-This project was developed as part of the **Derivco Code Skills Challenge**.
+I developed this project as part of the **Derivco Code Skills Challenge**.
 
 ---
 
 ## 📌 Problem Statement
 
-Developers often work on side projects in isolation and miss opportunities for visibility, collaboration, and motivation.
+I noticed that developers often work on side projects in isolation, which can make it hard to get visibility, collaborate, or stay motivated.
 
-MzansiBuilds solves this by providing a platform where developers can:
+MzansiBuilds solves this by giving developers—including myself—a place to:
 
 * create an account
-* publish projects they are working on
+* publish projects we are working on
 * share milestones and progress updates
 * request or offer collaboration
 * engage with other developers through comments
@@ -25,27 +29,27 @@ MzansiBuilds solves this by providing a platform where developers can:
 
 ### Authentication
 
-* User registration
-* Secure login
-* Profile management
+* I can register as a new user
+* I can securely log in
+* I can manage my profile
 
 ### Project Management
 
-* Create new project entries
-* Update project stages
-* Specify support required
-* Track milestone progress
+* I can create new project entries
+* I can update project stages
+* I can specify support required
+* I can track milestone progress
 
 ### Community Feed
 
-* Live feed of projects
-* Comment system
-* Collaboration requests
+* I can see a live feed of projects
+* I can comment on other developers’ projects
+* I can send and receive collaboration requests
 
 ### Celebration Wall
 
-* Completed projects automatically displayed
-* Public recognition of achievements
+* Completed projects are automatically displayed
+* Achievements get public recognition
 
 ---
 
@@ -66,7 +70,7 @@ MzansiBuilds solves this by providing a platform where developers can:
 
 ### Database
 
-* Postgreql
+* PostgreSQL
 
 ### Testing
 
@@ -102,9 +106,9 @@ mzansi-builds/
 
 ---
 
-## 🧠 Software Engineering Approach
+## 🧠 My Software Engineering Approach
 
-This project follows a structured engineering approach:
+I followed a structured approach while building this project:
 
 1. Requirement analysis
 2. Architecture design
@@ -113,13 +117,13 @@ This project follows a structured engineering approach:
 5. Documentation
 6. Deployment
 
-Development is being carried out feature-by-feature using version control best practices.
+I developed each feature step-by-step, following version control best practices.
 
 ---
 
 ## 🔒 Secure by Design
 
-Security principles applied include:
+I applied security principles including:
 
 * password hashing
 * secure authentication
@@ -131,7 +135,7 @@ Security principles applied include:
 
 ## 🧪 Testing Strategy
 
-The project includes unit and integration tests for:
+I wrote unit and integration tests for:
 
 * authentication routes
 * project creation
@@ -142,19 +146,19 @@ The project includes unit and integration tests for:
 
 ## 🤖 Ethical Use of AI
 
-AI tools were used as a **development companion** for:
+I used AI tools as a **development companion** for:
 
 * architectural brainstorming
 * code review support
 * documentation assistance
-* best practice validation
+* validating best practices
 
-All system design decisions, implementation logic, and engineering decisions were independently reasoned and validated by the developer.
+All system design decisions, implementation logic, and engineering choices were independently reasoned and validated by me.
 
 ---
 
-## 👨‍💻 Developer
+## 👨‍💻 About Me
 
 **Hamza Madi**
-Computer Science & IT
+Final-year Computer Science & IT
 University of KwaZulu-Natal
