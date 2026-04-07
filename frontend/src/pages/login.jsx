@@ -25,9 +25,11 @@ function Login() {
       const data = await res.json();
 
       if (res.ok) {
-        // ✅ SAVE USER SESSION
+        // ✅ Save session
         localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/dashboard");
+
+        // ✅ Go to the NEW starting page of the app
+        navigate("/create-project");   // ← your new home
       } else {
         setMessage(data.error || "Login failed");
       }
@@ -65,7 +67,7 @@ function Login() {
 
         <p className="auth-link">
           Don’t have an account? <Link to="/register">Register here</Link>
-        </p> 
+        </p>
       </div>
     </div>
   );

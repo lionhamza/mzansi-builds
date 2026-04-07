@@ -28,9 +28,7 @@ function Header() {
 
   return (
     <div className="header">
-      <div className="logo" onClick={() => navigate("/dashboard")}>
-        MzansiBuilds
-      </div>
+
 
       <div className="profile" ref={menuRef}>
         <img
@@ -43,8 +41,6 @@ function Header() {
         {open && (
           <div className="dropdown">
             <div onClick={() => navigate("/profile")}>My Profile</div>
-            <div onClick={() => navigate("/my-projects")}>My Projects</div>
-
             {/* ✅ fixed logout */}
             <div className="logout" onClick={handleLogout}>
               Logout

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import "./CreateProject.css";
 
 function CreateProject() {
-  const user = JSON.parse(localStorage.getItem("user")); // ✅ get logged in user
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const [formData, setFormData] = useState({
     title: "",
@@ -12,7 +12,14 @@ function CreateProject() {
     github_link: "",
   });
 
-  const [message, setMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const hidden = localStorage.getItem("hideProjectPopup");
+    if (hidden === "true") {
+      setShowPopup(false);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,25 +30,21 @@ function CreateProject() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          user_id: user.id,   // ✅ VERY IMPORTANT
+          user_id: user.id,
         }),
       });
 
-      const data = await res.json();
-
       if (res.ok) {
-        setMessage("✅ Project created successfully!");
+        setShowPopup(true);
         setFormData({
           title: "",
           description: "",
           tech_stack: "",
           github_link: "",
         });
-      } else {
-        setMessage(data.error || "Something went wrong");
       }
     } catch (err) {
-      setMessage("Error connecting to server");
+      console.error(err);
     }
   };
 
@@ -94,10 +97,28 @@ function CreateProject() {
 
             <button type="submit">Create Project</button>
           </form>
-
-          {message && <p className="success-msg">{message}</p>}
         </div>
       </div>
+
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-card">
+            <div className="badge">✓</div>
+
+            <h3>Project Created!</h3>
+            <p>Your project was successfully added.</p>
+
+            <button
+              onClick={() => {
+                setShowPopup(false);
+                localStorage.setItem("hideProjectPopup", "true");
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
