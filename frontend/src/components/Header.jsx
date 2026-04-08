@@ -7,9 +7,6 @@ function Header() {
   const menuRef = useRef();
   const navigate = useNavigate();
 
-  // ✅ get logged in user
-  const user = JSON.parse(localStorage.getItem("user"));
-
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -20,34 +17,28 @@ function Header() {
     return () => document.removeEventListener("click", handler);
   }, []);
 
-  // ✅ real logout
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/");
   };
 
   return (
-    <div className="header">
+    <div className="header-profile" ref={menuRef}>
+      <img
+        src="https://i.pravatar.cc/40"
+        alt="profile"
+        className="avatar"
+        onClick={() => setOpen(!open)}
+      />
 
-
-      <div className="profile" ref={menuRef}>
-        <img
-          src="https://i.pravatar.cc/40"
-          alt="profile"
-          className="avatar"
-          onClick={() => setOpen(!open)}
-        />
-
-        {open && (
-          <div className="dropdown">
-            <div onClick={() => navigate("/profile")}>My Profile</div>
-            {/* ✅ fixed logout */}
-            <div className="logout" onClick={handleLogout}>
-              Logout
-            </div>
+      {open && (
+        <div className="dropdown">
+          <div onClick={() => navigate("/profile")}>My Profile</div>
+          <div className="logout" onClick={handleLogout}>
+            Logout
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

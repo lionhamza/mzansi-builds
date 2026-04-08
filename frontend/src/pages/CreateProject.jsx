@@ -50,7 +50,7 @@ function CreateProject() {
 
   return (
     <>
-      <Header />
+      
 
       <div className="create-wrapper">
         <div className="create-card">

@@ -51,14 +51,6 @@
 
 
 /* push card away from header */
-.create-wrapper {
-  min-height: calc(100vh - 70px);
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px 20px;
-}
 
 /* POPUP OVERLAY */
 .popup-overlay {

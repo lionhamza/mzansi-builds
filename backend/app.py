@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
 from app.extensions import db
+
 from app.routes.auth_routes import auth_bp
 from app.routes.project import project_bp
+from app.routes.feed import feed_bp
+from app.routes.celebration import celebration_bp  # ✅ ADD THIS
 
 app = Flask(__name__)
 CORS(app)
@@ -14,6 +17,8 @@ db.init_app(app)
 
 app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(project_bp)
+app.register_blueprint(feed_bp)
+app.register_blueprint(celebration_bp)  # ✅ ADD THIS
 
 with app.app_context():
     db.create_all()

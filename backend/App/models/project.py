@@ -11,15 +11,8 @@ class Project(db.Model):
     status = db.Column(db.String(50), default="In Progress")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     github_link = db.Column(db.String(300))
+
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "title": self.title,
-            "description": self.description,
-            "tech_stack": self.tech_stack,
-            "status": self.status,
-            "created_at": self.created_at,
-            "user_id": self.user_id,
-        }
+    # ✅ KEEP ONLY THIS
+    posts = db.relationship("Post", backref="project", lazy=True)
