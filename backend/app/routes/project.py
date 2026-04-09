@@ -100,8 +100,15 @@ def get_my_projects(user_id):
 def create_post():
     data = request.get_json()
 
+    post_type = data.get("type")
+
+    # ✅ enforce only two values
+    if post_type not in ["progress", "help"]:
+        post_type = "progress"
+
     post = Post(
         message=data.get("message"),
+        post_type=post_type,
         user_id=data.get("user_id"),
         project_id=data.get("project_id")
     )
@@ -109,7 +116,7 @@ def create_post():
     db.session.add(post)
     db.session.commit()
 
-    return jsonify({"message": "Post created"}), 201
+    return jsonify(post.to_dict()), 201
 
 
 @project_bp.route("/complete-project/<int:project_id>", methods=["PUT"])
@@ -123,3 +130,23 @@ def complete_project(project_id):
     db.session.commit()
 
     return jsonify({"message": "Project marked as completed"}), 200
+
+
+
+@project_bp.route("/update-project/<int:project_id>", methods=["PUT"])
+def update_project(project_id):
+    data = request.get_json()
+
+    project = Project.query.get(project_id)
+
+    if not project:
+        return jsonify({"error": "Project not found"}), 404
+
+    project.title = data.get("title", project.title)
+    project.description = data.get("description", project.description)
+    project.tech_stack = data.get("tech_stack", project.tech_stack)
+    project.github_link = data.get("github_link", project.github_link)
+
+    db.session.commit()
+
+    return jsonify({"message": "Project updated successfully"}), 200

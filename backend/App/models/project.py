@@ -14,5 +14,6 @@ class Project(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
-    # ✅ KEEP ONLY THIS
-    posts = db.relationship("Post", backref="project", lazy=True)
+    # relationships
+    user = db.relationship("User", back_populates="projects")
+    posts = db.relationship("Post", back_populates="project", cascade="all, delete")

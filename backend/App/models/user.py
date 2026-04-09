@@ -9,5 +9,6 @@ class User(db.Model):
     password = db.Column(db.String(200))
     profile_image = db.Column(db.String(500))
 
-    # ✅ THIS IS THE ONLY RELATIONSHIP
-    projects = db.relationship("Project", backref="user", lazy=True)
+    # relationships
+    projects = db.relationship("Project", back_populates="user", cascade="all, delete")
+    posts = db.relationship("Post", back_populates="user", cascade="all, delete")

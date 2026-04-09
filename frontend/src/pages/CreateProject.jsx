@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "../components/Header";
 import "./CreateProject.css";
 
 function CreateProject() {
@@ -14,11 +13,14 @@ function CreateProject() {
 
   const [showPopup, setShowPopup] = useState(false);
 
+  // ✅ LOCK SCROLL ONLY ON THE REAL SCROLL CONTAINER (.page-content)
   useEffect(() => {
-    const hidden = localStorage.getItem("hideProjectPopup");
-    if (hidden === "true") {
-      setShowPopup(false);
-    }
+    const page = document.querySelector(".page-content");
+    if (page) page.classList.add("no-scroll");
+
+    return () => {
+      if (page) page.classList.remove("no-scroll");
+    };
   }, []);
 
   const handleSubmit = async (e) => {
@@ -50,8 +52,6 @@ function CreateProject() {
 
   return (
     <>
-      
-
       <div className="create-wrapper">
         <div className="create-card">
           <h2>Create New Project</h2>
@@ -104,18 +104,9 @@ function CreateProject() {
         <div className="popup-overlay">
           <div className="popup-card">
             <div className="badge">✓</div>
-
             <h3>Project Created!</h3>
             <p>Your project was successfully added.</p>
-
-            <button
-              onClick={() => {
-                setShowPopup(false);
-                localStorage.setItem("hideProjectPopup", "true");
-              }}
-            >
-              Close
-            </button>
+            <button onClick={() => setShowPopup(false)}>Close</button>
           </div>
         </div>
       )}

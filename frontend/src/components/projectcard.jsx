@@ -1,38 +1,59 @@
-import { useState } from "react";
-import "./ProjectCard.css";
+import "./DevFeedCard.css";
 
-function ProjectCard({ project, user }) {
-  const [message, setMessage] = useState("");
-
-  const postUpdate = () => {
-    fetch("http://localhost:5000/create-post", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message,
-        user_id: user.id,
-        project_id: project.id
-      })
-    }).then(() => {
-      setMessage("");
-      alert("Update posted to feed!");
-    });
-  };
-
+function DevFeedCard({ post }) {
   return (
-    <div className="project-card">
-      <h3>{project.title}</h3>
-      <p>{project.description}</p>
+    <div className="dev-card">
+      {/* Header */}
+      <div className="dev-card-header">
+        <div className="dev-user">
+          <img src={post.user.profile_image} alt="avatar" />
 
-      <textarea
-        placeholder="Share your progress update..."
-        value={message}
-        onChange={e => setMessage(e.target.value)}
-      />
+          <div className="dev-user-info">
+            <strong>{post.user.full_name}</strong>
+            <span className="time">
+              {new Date(post.created_at).toLocaleString()}
+            </span>
+          </div>
+        </div>
 
-      <button onClick={postUpdate}>Post Update</button>
+        <div className="project-badge">{post.project.title}</div>
+      </div>
+
+      {/* Body */}
+      <div className="dev-card-body">
+        <h4>🚀 Progress Update</h4>
+        <p>{post.message}</p>
+
+        {/* ✅ GitHub Link */}
+        {post.project.github_link && (
+          <a
+            href={post.project.github_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="github-link"
+          >
+            🔗 View Project Repository
+          </a>
+        )}
+
+        {/* Tech Stack */}
+        <div className="tech-row">
+          {post.project.tech_stack
+            ?.split(",")
+            .map((tech, i) => (
+              <span key={i}>{tech.trim()}</span>
+            ))}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="dev-card-footer">
+        <span>👍 Like</span>
+        <span>💬 Comment</span>
+        <span>🤝 Collaborate</span>
+      </div>
     </div>
   );
 }
 
-export default ProjectCard;
+export default DevFeedCard;

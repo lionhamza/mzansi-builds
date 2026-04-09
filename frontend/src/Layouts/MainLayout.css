@@ -60,4 +60,9 @@
 .page-content {
   padding: 50px 60px;
   overflow-y: auto;
+  height: 100%;
+}
+
+.page-content.no-scroll {
+  overflow: hidden;
 }

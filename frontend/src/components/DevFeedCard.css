@@ -114,3 +114,21 @@
 .dev-card-footer span:hover {
   color: #00ff88;
 }
+
+.github-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #58a6ff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.github-link:hover {
+  background: #161b22;
+  transform: translateY(-2px);
+}

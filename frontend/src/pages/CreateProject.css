@@ -1,17 +1,27 @@
+/* ===== PAGE WRAPPER (works with your app-layout) ===== */
+.create-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+/* ===== CARD ===== */
 .create-card {
-  max-width: 720px;
-  margin: 0 auto;
+  width: 720px;
   background: #0f141a;
   border: 1px solid #1f2a37;
   border-radius: 14px;
-  padding: 40px;
+  padding: 28px;
 }
 
+/* ===== TITLE ===== */
 .create-card h2 {
-  margin-bottom: 30px;
+  margin-bottom: 26px;
   color: #00ff88;
 }
 
+/* ===== INPUTS ===== */
 .create-card input,
 .create-card textarea {
   width: 100%;
@@ -30,6 +40,7 @@
   border-color: #00ff88;
 }
 
+/* ===== BUTTON ===== */
 .create-card button {
   margin-top: 10px;
   padding: 14px;
@@ -42,78 +53,7 @@
   cursor: pointer;
 }
 
-.create-wrapper {
-  background: #0b0b0b;
-  padding: 80px 20px 0px;   /* TOP SPACE from header */
-  display: flex;
-  justify-content: center;
-}
-
-
-/* push card away from header */
-
-/* POPUP OVERLAY */
-.popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-/* POPUP CARD */
-.popup-card {
-  width: 320px;
-  background: white;
-  border-radius: 16px;
-  text-align: center;
-  padding: 30px 25px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  animation: pop 0.25s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* GREEN BADGE */
-.badge {
-  width: 70px;
-  height: 70px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background: #00ff88;
-  color: white;
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
-
-/* BUTTON */
-.popup-card button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  background: #00ff88;
-  cursor: pointer;
-  font-weight: bold;
-}
-/* push card a bit further from header and center nicely */
-.create-wrapper {
-  background: #0b0b0b;
-  padding: 110px 20px 40px;   /* more space from header */
-  display: flex;
-  justify-content: center;
-}
-
-/* ================= POPUP ================= */
-
+/* ===== POPUP OVERLAY ===== */
 .popup-overlay {
   position: fixed;
   inset: 0;
@@ -124,6 +64,7 @@
   z-index: 9999;
 }
 
+/* ===== POPUP CARD ===== */
 .popup-card {
   width: 340px;
   background: white;
@@ -145,7 +86,7 @@
   }
 }
 
-/* green badge with tick */
+/* ===== BADGE ===== */
 .badge {
   width: 72px;
   height: 72px;
@@ -160,7 +101,7 @@
   font-weight: bold;
 }
 
-/* popup button */
+/* ===== POPUP BUTTON ===== */
 .popup-card button {
   margin-top: 18px;
   padding: 10px 22px;
@@ -173,5 +114,5 @@
 
 .popup-card h3,
 .popup-card p {
-  color: #0b0f14;   /* black text */
+  color: #0b0f14;
 }

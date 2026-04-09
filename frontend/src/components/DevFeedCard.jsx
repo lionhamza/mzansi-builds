@@ -26,7 +26,12 @@ function DevFeedCard({ post }) {
 
       {/* Body */}
       <div className="dev-card-body">
-        <h4>Progress Update</h4>
+        <h4>
+          {post.post_type === "help"
+            ? "🆘 Asked for Help"
+            : "🚀 Progress Update"}
+        </h4>
+
         <p>{post.message}</p>
 
         <div className="tech-row">
@@ -36,6 +41,18 @@ function DevFeedCard({ post }) {
               <span key={i}>{tech.trim()}</span>
             ))}
         </div>
+
+        {/* ✅ GITHUB LINK */}
+        {post.project.github_link && (
+          <a
+            href={post.project.github_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="github-link"
+          >
+            🔗 View GitHub Repository
+          </a>
+        )}
       </div>
 
       {/* Footer */}

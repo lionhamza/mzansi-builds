@@ -12,8 +12,9 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
 
-    # ✅ THIS WAS MISSING (breaks feed & myprojects)
-    user = db.relationship("User", backref="posts")
+    # relationships
+    user = db.relationship("User", back_populates="posts")
+    project = db.relationship("Project", back_populates="posts")
 
     def to_dict(self):
         return {
@@ -31,5 +32,6 @@ class Post(db.Model):
                 "title": self.project.title,
                 "tech_stack": self.project.tech_stack,
                 "status": self.project.status,
+                "github_link": self.project.github_link,
             }
         }
