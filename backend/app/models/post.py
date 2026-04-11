@@ -6,7 +6,7 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.Text, nullable=False)
-    post_type = db.Column(db.String(20), default="progress_update")
+    post_type = db.Column(db.String(20), default="progress")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)

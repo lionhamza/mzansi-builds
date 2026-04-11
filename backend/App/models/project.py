@@ -17,3 +17,16 @@ class Project(db.Model):
     # relationships
     user = db.relationship("User", back_populates="projects")
     posts = db.relationship("Post", back_populates="project", cascade="all, delete")
+
+    # ✅ VERY IMPORTANT — DO NOT RETURN RELATIONSHIPS
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "tech_stack": self.tech_stack,
+            "status": self.status,
+            "created_at": self.created_at.isoformat(),
+            "github_link": self.github_link,
+            "user_id": self.user_id,
+        }

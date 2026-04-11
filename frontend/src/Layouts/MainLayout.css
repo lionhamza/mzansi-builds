@@ -51,18 +51,32 @@
   height: 70px;
   border-bottom: 1px solid #1f2a37;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   padding: 0 40px;
   background: #0f141a;
 }
-
 .page-content {
-  padding: 50px 60px;
+  padding: 10px 60px 40px; /* top | sides | bottom */
   overflow-y: auto;
   height: 100%;
 }
 
 .page-content.no-scroll {
   overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+}
+
+.bell-link {
+  color: white;
+  cursor: pointer;
+}
+
+.bell-link:hover {
+  transform: scale(1.1);
 }

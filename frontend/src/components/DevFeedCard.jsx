@@ -1,15 +1,30 @@
 import "./DevFeedCard.css";
 
 function DevFeedCard({ post }) {
+  const handleCollaborate = async () => {
+  try {
+    const res = await fetch("http://127.0.0.1:5000/request-collaboration", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        project_id: post.project.id,   // ✅ CORRECT
+        requester_id: user.id,         // ✅ CORRECT
+      }),
+    });
+
+    const data = await res.json();
+    alert(data.message || data.error);
+  } catch (err) {
+    alert("Error sending request");
+  }
+};
+
   return (
     <div className="dev-card">
       {/* Header */}
       <div className="dev-card-header">
         <div className="dev-user">
-          <img
-            src={post.user.profile_image}
-            alt="avatar"
-          />
+          <img src={post.user.profile_image} alt="avatar" />
 
           <div className="dev-user-info">
             <strong>{post.user.full_name}</strong>
@@ -19,9 +34,7 @@ function DevFeedCard({ post }) {
           </div>
         </div>
 
-        <div className="project-badge">
-          {post.project.title}
-        </div>
+        <div className="project-badge">{post.project.title}</div>
       </div>
 
       {/* Body */}
@@ -35,14 +48,11 @@ function DevFeedCard({ post }) {
         <p>{post.message}</p>
 
         <div className="tech-row">
-          {post.project.tech_stack
-            ?.split(",")
-            .map((tech, i) => (
-              <span key={i}>{tech.trim()}</span>
-            ))}
+          {post.project.tech_stack?.split(",").map((tech, i) => (
+            <span key={i}>{tech.trim()}</span>
+          ))}
         </div>
 
-        {/* ✅ GITHUB LINK */}
         {post.project.github_link && (
           <a
             href={post.project.github_link}
@@ -59,7 +69,11 @@ function DevFeedCard({ post }) {
       <div className="dev-card-footer">
         <span>👍 Like</span>
         <span>💬 Comment</span>
-        <span>✋ Collaborate</span>
+
+        {/* ✅ REAL COLLABORATE BUTTON */}
+        <span className="collab-btn" onClick={handleCollaborate}>
+          ✋ Collaborate
+        </span>
       </div>
     </div>
   );

@@ -1,0 +1,100 @@
+.notifications-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  color: #e6edf3;
+}
+
+.notifications-page h2 {
+  margin-bottom: 24px;
+  color: #00ff88;
+}
+
+.empty-state {
+  background: #0f141a;
+  border: 1px solid #1f2a37;
+  padding: 30px;
+  border-radius: 14px;
+  text-align: center;
+  color: #8b949e;
+}
+
+/* Notification card */
+.notif-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: linear-gradient(180deg, #0f141a 0%, #0c1116 100%);
+  border: 1px solid #1f2a37;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+  transition: 0.2s ease;
+}
+
+.notif-card:hover {
+  border: 1px solid #00ff88;
+  transform: translateY(-2px);
+}
+
+.notif-card img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid #1f2a37;
+}
+
+/* Info */
+.notif-info {
+  flex: 1;
+}
+
+.notif-info strong {
+  color: #e6edf3;
+  font-size: 15px;
+}
+
+.notif-info p {
+  margin: 4px 0;
+  color: #8b949e;
+  font-size: 13px;
+}
+
+.notif-info b {
+  color: #00ff88;
+}
+
+/* Actions */
+.notif-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.accept-btn,
+.decline-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.accept-btn {
+  background: #00ff88;
+  color: #0f141a;
+}
+
+.accept-btn:hover {
+  opacity: 0.85;
+}
+
+.decline-btn {
+  background: #1f2a37;
+  color: #ff6b6b;
+}
+
+.decline-btn:hover {
+  background: #2a3646;
+}

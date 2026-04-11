@@ -132,3 +132,13 @@
   background: #161b22;
   transform: translateY(-2px);
 }
+
+.collab-btn {
+  cursor: pointer;
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.collab-btn:hover {
+  text-decoration: underline;
+}

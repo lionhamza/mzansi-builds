@@ -1,8 +1,8 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from app.extensions import db
 from app.models.project import Project
 from app.models.post import Post
-
+from app.models.collaborationrequest import CollaborationRequest
 project_bp = Blueprint("project", __name__)
 
 
@@ -150,3 +150,69 @@ def update_project(project_id):
     db.session.commit()
 
     return jsonify({"message": "Project updated successfully"}), 200
+
+
+@project_bp.route("/request-collaboration", methods=["POST"])
+def request_collaboration():
+    data = request.get_json()
+    project_id = data["project_id"]
+    requester_id = data["requester_id"]
+
+    project = Project.query.get_or_404(project_id)
+
+    if project.user_id == requester_id:
+        return jsonify({"error": "You cannot collaborate on your own project"}), 400
+
+    existing = CollaborationRequest.query.filter_by(
+        project_id=project_id,
+        requester_id=requester_id,
+        status="pending"
+    ).first()
+
+    if existing:
+        return jsonify({"error": "Already requested"}), 400
+
+    collab = CollaborationRequest(
+        project_id=project_id,
+        requester_id=requester_id,
+        owner_id=project.user_id,
+    )
+
+    db.session.add(collab)
+    db.session.commit()
+
+    return jsonify({"message": "Request sent"})
+
+@project_bp.route("/my-collab-notifications/<int:user_id>")
+def my_collab_notifications(user_id):
+    requests = CollaborationRequest.query.filter_by(
+        owner_id=user_id,
+        status="pending"
+    ).all()
+
+    return jsonify([
+        {
+            "id": r.id,
+            "project_title": r.project.title,
+            "requester_name": r.requester.full_name,
+            "requester_image": r.requester.profile_image,
+        }
+        for r in requests
+    ])
+
+
+
+@project_bp.route("/collab-action/<int:req_id>", methods=["POST"])
+def collab_action(req_id):
+    data = request.get_json()
+    action = data.get("action")
+
+    req = CollaborationRequest.query.get_or_404(req_id)
+
+    if action == "accept":
+        req.status = "accepted"
+    elif action == "decline":
+        req.status = "declined"
+
+    db.session.commit()
+    return jsonify({"message": "Done"})

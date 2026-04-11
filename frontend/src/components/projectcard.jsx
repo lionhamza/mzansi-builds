@@ -1,6 +1,27 @@
 import "./DevFeedCard.css";
 
 function DevFeedCard({ post }) {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const handleCollaborate = async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:5000/request-collab", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          post_id: post.id,
+          requester_id: user.id,
+        }),
+      });
+
+      const data = await res.json();
+      alert(data.message);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send request");
+    }
+  };
+
   return (
     <div className="dev-card">
       {/* Header */}
@@ -21,10 +42,15 @@ function DevFeedCard({ post }) {
 
       {/* Body */}
       <div className="dev-card-body">
-        <h4>🚀 Progress Update</h4>
+        <h4>
+          {post.post_type === "help"
+            ? "🆘 Asked for Help"
+            : "🚀 Progress Update"}
+        </h4>
+
         <p>{post.message}</p>
 
-        {/* ✅ GitHub Link */}
+        {/* GitHub Link */}
         {post.project.github_link && (
           <a
             href={post.project.github_link}
@@ -50,7 +76,11 @@ function DevFeedCard({ post }) {
       <div className="dev-card-footer">
         <span>👍 Like</span>
         <span>💬 Comment</span>
-        <span>🤝 Collaborate</span>
+
+        {/* 🤝 Collaborate */}
+        <span className="collab-btn" onClick={handleCollaborate}>
+          🤝 Collaborate
+        </span>
       </div>
     </div>
   );
