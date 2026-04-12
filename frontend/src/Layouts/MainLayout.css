@@ -80,3 +80,17 @@
 .bell-link:hover {
   transform: scale(1.1);
 }
+
+/* PROFILE LINK WITH IMAGE NEXT TO TEXT */
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;          /* small space between text and image */
+}
+
+.sidebar-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}

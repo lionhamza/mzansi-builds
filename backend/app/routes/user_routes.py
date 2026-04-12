@@ -51,3 +51,4 @@ def get_profile(user_id):
         "projects": projects,
         "posts": posts
     }), 200
+

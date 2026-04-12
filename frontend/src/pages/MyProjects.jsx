@@ -8,11 +8,16 @@ function MyProjects() {
   const [editData, setEditData] = useState({});
   const [celebrate, setCelebrate] = useState(false);
 
+  // ✅ FIXED — correct API call with user id
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) return;
+
     fetch(`http://localhost:5000/my-projects/${user.id}`)
       .then((res) => res.json())
-      .then((data) => setProjects(data));
+      .then((data) => setProjects(data))
+      .catch((err) => console.error("Error loading projects:", err));
   }, []);
 
   const openModal = (project, type) => {
@@ -78,8 +83,6 @@ function MyProjects() {
       <div className="projects-grid">
         {projects.map((project) => (
           <div key={project.id} className="project-card">
-
-            {/* TOP BAR */}
             <div className="project-top">
               <div className="status-section">
                 <span className={`status ${project.status.toLowerCase()}`}>
@@ -111,7 +114,6 @@ function MyProjects() {
               ))}
             </div>
 
-            {/* ACTIONS */}
             <div className="project-actions">
               {project.status !== "Completed" ? (
                 <>
@@ -144,24 +146,7 @@ function MyProjects() {
                     rel="noopener noreferrer"
                     className="github-pro-btn"
                   >
-                    <svg viewBox="0 0 24 24" width="20" height="20">
-                      <path
-                        fill="currentColor"
-                        d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58
-                        0-.29-.01-1.06-.02-2.08-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.77-1.34-1.77
-                        -1.1-.75.08-.73.08-.73 1.21.09 1.85 1.25 1.85 1.25
-                        1.08 1.85 2.83 1.32 3.52 1.01.11-.78.42-1.32.76-1.62
-                        -2.67-.31-5.47-1.34-5.47-5.93
-                        0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.53.12-3.18
-                        0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013.01-.41c1.02 0 2.05.14 3.01.41
-                        2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.88.12 3.18
-                        .77.84 1.24 1.91 1.24 3.22
-                        0 4.6-2.8 5.61-5.48 5.92.43.37.81 1.1.81 2.22
-                        0 1.6-.02 2.89-.02 3.28 0 .32.22.69.83.57A12.01 12.01 0 0024 12
-                        C24 5.37 18.63 0 12 0z"
-                      />
-                    </svg>
-                    <span>Open Repository</span>
+                    Open Repository
                   </a>
                 )
               )}
@@ -170,7 +155,6 @@ function MyProjects() {
         ))}
       </div>
 
-      {/* MODAL */}
       {modal && (
         <div className="modal-overlay">
           <div className="modal">

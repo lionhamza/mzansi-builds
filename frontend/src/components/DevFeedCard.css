@@ -142,3 +142,125 @@
 .collab-btn:hover {
   text-decoration: underline;
 }
+
+.collab-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #1f2a37;
+  transition: 0.2s ease;
+}
+
+.collab-btn.requested {
+  background: #00ff88;
+  color: #0b1015;
+  font-weight: bold;
+  border-color: #00ff88;
+}
+
+.collab-btn.requested:hover {
+  transform: scale(1.05);
+}
+
+.collab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #1f2a37;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.collab-btn.requested {
+  background: #00ff88;
+  color: #0b1015;
+  font-weight: bold;
+  border-color: #00ff88;
+}
+
+.collab-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.star-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.star-icon {
+  width: 20px;
+}
+
+.collab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.star-btn {
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.starred {
+  color: gold;
+}
+
+.collab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.collab-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* 🤝 Collaboration Button */
+.collab-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #161b22;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-weight: 600;
+  color: #c9d1d9;
+}
+
+.collab-btn:hover {
+  transform: translateY(-2px);
+  border-color: #00ff88;
+  box-shadow: 0 6px 18px rgba(0, 255, 136, 0.15);
+}
+
+/* When requested */
+.collab-btn.requested {
+  background: #0d2a1f;
+  border-color: #00ff88;
+  color: #00ff88;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
+}
+
+.collab-icon {
+  width: 20px;
+  height: 20px;
+  transition: 0.2s ease;
+}
+
+.collab-btn.requested .collab-icon {
+  transform: scale(1.15);
+}

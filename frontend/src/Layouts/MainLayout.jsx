@@ -16,7 +16,14 @@ function MainLayout() {
           <NavLink to="/my-projects">My Projects</NavLink>
           <NavLink to="/create-project">Create Project</NavLink>
           <NavLink to="/celebration-wall">Celebration Wall</NavLink>
-          <NavLink to={`/profile/${user?.id}`}>View Profile</NavLink>
+          <NavLink to={`/profile/${user?.id}`} className="profile-link">
+  <span>View Profile</span>
+  <img
+    src="https://i.pravatar.cc/30"
+    alt="profile"
+    className="sidebar-avatar"
+  />
+</NavLink>
           <NavLink to="/notifications">Notifications</NavLink>
         </nav>
       </aside>

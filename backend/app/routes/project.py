@@ -165,12 +165,11 @@ def request_collaboration():
 
     existing = CollaborationRequest.query.filter_by(
         project_id=project_id,
-        requester_id=requester_id,
-        status="pending"
+        requester_id=requester_id
     ).first()
 
     if existing:
-        return jsonify({"error": "Already requested"}), 400
+        return jsonify({"error": "Already collaborating"}), 400
 
     collab = CollaborationRequest(
         project_id=project_id,
@@ -181,7 +180,7 @@ def request_collaboration():
     db.session.add(collab)
     db.session.commit()
 
-    return jsonify({"message": "Request sent"})
+    return jsonify({"message": "Request sent"}), 201
 
 @project_bp.route("/my-collab-notifications/<int:user_id>")
 def my_collab_notifications(user_id):
@@ -216,3 +215,93 @@ def collab_action(req_id):
 
     db.session.commit()
     return jsonify({"message": "Done"})
+
+@project_bp.route("/collab-status/<int:project_id>/<int:user_id>")
+def collab_status(project_id, user_id):
+    existing = CollaborationRequest.query.filter_by(
+        project_id=project_id,
+        requester_id=user_id,
+        status="pending"
+    ).first()
+
+    if existing:
+        return jsonify({"requested": True, "request_id": existing.id})
+
+    return jsonify({"requested": False})
+
+@project_bp.route("/remove-collaboration", methods=["DELETE"])
+def remove_collaboration():
+    data = request.get_json()
+
+    project_id = data["project_id"]
+    requester_id = data["requester_id"]
+
+    collab = CollaborationRequest.query.filter_by(
+        project_id=project_id,
+        requester_id=requester_id
+    ).first()
+
+    if not collab:
+        return jsonify({"error": "Request not found"}), 404
+
+    db.session.delete(collab)
+    db.session.commit()
+
+    return jsonify({"message": "Collaboration removed"}), 200
+
+from app.models.projectstar import ProjectStar
+
+
+@project_bp.route("/toggle-star", methods=["POST"])
+def toggle_star():
+    data = request.get_json()
+
+    project_id = data["project_id"]
+    user_id = data["user_id"]
+
+    existing = ProjectStar.query.filter_by(
+        project_id=project_id,
+        user_id=user_id
+    ).first()
+
+    if existing:
+        db.session.delete(existing)
+        db.session.commit()
+
+        star_count = ProjectStar.query.filter_by(project_id=project_id).count()
+
+        return jsonify({
+            "starred": False,
+            "star_count": star_count
+        }), 200
+
+    new_star = ProjectStar(
+        project_id=project_id,
+        user_id=user_id
+    )
+
+    db.session.add(new_star)
+    db.session.commit()
+
+    star_count = ProjectStar.query.filter_by(project_id=project_id).count()
+
+    return jsonify({
+        "starred": True,
+        "star_count": star_count
+    }), 201
+
+@project_bp.route("/star-status/<int:project_id>/<int:user_id>")
+def star_status(project_id, user_id):
+    existing = ProjectStar.query.filter_by(
+        project_id=project_id,
+        user_id=user_id
+    ).first()
+
+    star_count = ProjectStar.query.filter_by(
+        project_id=project_id
+    ).count()
+
+    return jsonify({
+        "starred": existing is not None,
+        "star_count": star_count
+    })
