@@ -74,7 +74,7 @@ I chose :contentReference[oaicite:0]{index=0} because I wanted a robust relation
 
 Below is the UML class diagram I created during the planning phase.
 
-![UML Diagram](./screenshots/MzansiBuild-UML.png)
+![UML Diagram](screenshots/MzansiBuild-UML.png)
 
 **Figure 1:** My UML class diagram showing the relationships between:
 
