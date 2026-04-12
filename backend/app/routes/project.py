@@ -3,8 +3,10 @@ from app.extensions import db
 from app.models.project import Project
 from app.models.post import Post
 from app.models.collaborationrequest import CollaborationRequest
-project_bp = Blueprint("project", __name__)
+from app.models.comment import Comment
 
+
+project_bp = Blueprint("project", __name__)
 
 @project_bp.route("/create-project", methods=["POST"])
 def create_project():
@@ -305,3 +307,42 @@ def star_status(project_id, user_id):
         "starred": existing is not None,
         "star_count": star_count
     })
+
+
+
+@project_bp.route("/comments/<int:post_id>")
+def get_comments(post_id):
+    comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.created_at.desc()).all()
+    return jsonify([c.to_dict() for c in comments])
+
+
+@project_bp.route("/add-comment", methods=["POST"])
+def add_comment():
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    data = request.get_json()
+    post_id = data.get("post_id")
+    message = data.get("message")
+
+    if not message:
+        return jsonify({"error": "Empty comment"}), 400
+
+    new_comment = Comment(
+        post_id=post_id,
+        user_id=user_id,
+        message=message
+    )
+
+    db.session.add(new_comment)
+    db.session.commit()
+
+    return jsonify({
+        "id": new_comment.id,
+        "message": new_comment.message,
+        "user": {
+            "full_name": new_comment.user.full_name,
+            "profile_image": new_comment.user.profile_image,
+        }
+    }), 201

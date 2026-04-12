@@ -1,5 +1,6 @@
 import "./DevFeedCard.css";
 import { useState, useEffect } from "react";
+import CommentModal from "./CommentModal";
 
 import collaborateIcon from "../assets/icons/collaborate.png";
 import requestedIcon from "../assets/icons/requested.png";
@@ -7,13 +8,16 @@ import starIcon from "../assets/icons/star.png";
 import starredIcon from "../assets/icons/icons8-star-50.png";
 
 function DevFeedCard({ post }) {
-  const [isCollaborating, setIsCollaborating] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const savedUser = JSON.parse(localStorage.getItem("user"));
 
+  const [isCollaborating, setIsCollaborating] = useState(false);
   const [isStarred, setIsStarred] = useState(false);
   const [starCount, setStarCount] = useState(0);
 
-  const savedUser = JSON.parse(localStorage.getItem("user"));
+  const [loadingCollab, setLoadingCollab] = useState(false);
+  const [loadingStar, setLoadingStar] = useState(false);
+
+  const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
     if (!savedUser) return;
@@ -26,20 +30,24 @@ function DevFeedCard({ post }) {
         setIsStarred(data.starred);
         setStarCount(data.star_count);
       });
-  }, [post.project.id]);
+
+    fetch(
+      `http://127.0.0.1:5000/collab-status/${post.project.id}/${savedUser.id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setIsCollaborating(data.collaborating);
+      });
+  }, [post.project.id, savedUser?.id]);
 
   const handleStarToggle = async () => {
-    if (!savedUser) {
-      alert("Please login first");
-      return;
-    }
+    if (!savedUser) return alert("Please login first");
+    setLoadingStar(true);
 
     try {
       const res = await fetch("http://127.0.0.1:5000/toggle-star", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           project_id: post.project.id,
           user_id: savedUser.id,
@@ -52,18 +60,20 @@ function DevFeedCard({ post }) {
         setIsStarred(data.starred);
         setStarCount(data.star_count);
       }
-    } catch (err) {
+    } catch {
       alert("Star failed");
     }
+
+    setLoadingStar(false);
   };
 
   const handleCollaborateToggle = async () => {
-    if (!savedUser) {
-      alert("Please login first");
-      return;
+    if (!savedUser) return alert("Please login first");
+    if (savedUser.id === post.user.id) {
+      return alert("You cannot collaborate on your own project");
     }
 
-    setLoading(true);
+    setLoadingCollab(true);
 
     try {
       const url = isCollaborating
@@ -72,9 +82,7 @@ function DevFeedCard({ post }) {
 
       const res = await fetch(url, {
         method: isCollaborating ? "DELETE" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           project_id: post.project.id,
           requester_id: savedUser.id,
@@ -84,11 +92,11 @@ function DevFeedCard({ post }) {
       if (res.ok) {
         setIsCollaborating(!isCollaborating);
       }
-    } catch (err) {
+    } catch {
       alert("Something went wrong");
     }
 
-    setLoading(false);
+    setLoadingCollab(false);
   };
 
   return (
@@ -96,7 +104,6 @@ function DevFeedCard({ post }) {
       <div className="dev-card-header">
         <div className="dev-user">
           <img src={post.user.profile_image} alt="avatar" />
-
           <div className="dev-user-info">
             <strong>{post.user.full_name}</strong>
             <span className="time">
@@ -131,10 +138,12 @@ function DevFeedCard({ post }) {
             alt="star"
             className="star-icon"
           />
-          {starCount}
+          {loadingStar ? "..." : starCount}
         </span>
 
-        <span>💬 Comment</span>
+        <span className="comment-btn" onClick={() => setShowComments(true)}>
+          💬 Comment
+        </span>
 
         <span
           className={`collab-btn ${isCollaborating ? "requested" : ""}`}
@@ -145,14 +154,20 @@ function DevFeedCard({ post }) {
             alt="collab"
             className="collab-icon"
           />
-
-          {loading
+          {loadingCollab
             ? "Loading..."
             : isCollaborating
-            ? "Collaborating"
+            ? "Requested"
             : "Collaborate"}
         </span>
       </div>
+
+      {showComments && (
+        <CommentModal
+          postId={post.id}
+          onClose={() => setShowComments(false)}
+        />
+      )}
     </div>
   );
 }

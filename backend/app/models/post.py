@@ -1,6 +1,7 @@
 from app.extensions import db
 from datetime import datetime
 
+
 class Post(db.Model):
     __tablename__ = "posts"
 
@@ -15,6 +16,12 @@ class Post(db.Model):
     # relationships
     user = db.relationship("User", back_populates="posts")
     project = db.relationship("Project", back_populates="posts")
+
+    comments = db.relationship(
+        "Comment",
+        back_populates="post",
+        cascade="all, delete-orphan"
+    )
 
     def to_dict(self):
         return {

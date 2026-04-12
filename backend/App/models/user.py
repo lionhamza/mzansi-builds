@@ -1,5 +1,6 @@
 from app.extensions import db
 
+
 class User(db.Model):
     __tablename__ = "users"
 
@@ -10,5 +11,20 @@ class User(db.Model):
     profile_image = db.Column(db.String(500))
 
     # relationships
-    projects = db.relationship("Project", back_populates="user", cascade="all, delete")
-    posts = db.relationship("Post", back_populates="user", cascade="all, delete")
+    projects = db.relationship(
+        "Project",
+        back_populates="user",
+        cascade="all, delete"
+    )
+
+    posts = db.relationship(
+        "Post",
+        back_populates="user",
+        cascade="all, delete"
+    )
+
+    comments = db.relationship(
+        "Comment",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
