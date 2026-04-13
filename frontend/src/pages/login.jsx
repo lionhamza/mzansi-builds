@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
+import mzansiIcon from "../../image/MzansiBuil-logo.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -25,11 +26,8 @@ function Login() {
       const data = await res.json();
 
       if (res.ok) {
-        // ✅ Save session
         localStorage.setItem("user", JSON.stringify(data.user));
-
-        // ✅ Go to the NEW starting page of the app
-        navigate("/create-project");   // ← your new home
+        navigate("/create-project");
       } else {
         setMessage(data.error || "Login failed");
       }
@@ -41,6 +39,7 @@ function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        <img src={mzansiIcon} alt="BuildMzansi Logo" className="auth-logo" />
         <h2>Login</h2>
 
         <form onSubmit={handleSubmit}>

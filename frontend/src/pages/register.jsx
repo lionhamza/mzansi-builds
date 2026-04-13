@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../index.css";
+import mzansiIcon from "../../image/MzansiBuil-logo.png";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -39,6 +40,7 @@ function Register() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        <img src={mzansiIcon} alt="BuildMzansi Logo" className="auth-logo" />
         <h2>Register</h2>
 
         <form onSubmit={handleSubmit}>

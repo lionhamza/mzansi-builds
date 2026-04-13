@@ -83,3 +83,12 @@
   font-weight: bold;
   text-decoration: none;
 }
+
+/* LOGO */
+.auth-logo {
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: 0 auto 20px auto;
+}
