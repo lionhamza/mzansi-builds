@@ -301,3 +301,16 @@
 .edit-avatar:hover {
   transform: scale(1.1);
 }
+
+.comment-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.comment-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}

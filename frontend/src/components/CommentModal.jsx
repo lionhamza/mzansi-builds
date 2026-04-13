@@ -39,7 +39,7 @@ function CommentModal({ postId, onClose }) {
 
       if (res.ok) {
         setMessage("");
-        await loadComments(); // ✅ ALWAYS RELOAD FROM SERVER
+        await loadComments();
       }
     } catch (err) {
       console.error("Failed to post comment", err);
@@ -49,12 +49,28 @@ function CommentModal({ postId, onClose }) {
   return (
     <div className="comment-overlay" onClick={onClose}>
       <div className="comment-modal" onClick={(e) => e.stopPropagation()}>
-        <h3>Comments</h3>
+        
+        {/* HEADER WITH CANCEL */}
+        <div className="comment-header">
+          <h3>Comments</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
 
         <div className="comment-list">
           {comments.map((c) => (
             <div key={c.id} className="comment-item">
-              <img src={c.user.profile_image} alt="" />
+              <img
+                src={
+                  c.user?.profile_image
+                    ? `http://127.0.0.1:5000${c.user.profile_image}`
+                    : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                }
+                alt="avatar"
+                onError={(e) =>
+                  (e.target.src =
+                    "https://cdn-icons-png.flaticon.com/512/149/149071.png")
+                }
+              />
               <div>
                 <strong>{c.user.full_name}</strong>
                 <p>{c.message}</p>

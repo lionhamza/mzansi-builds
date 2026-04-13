@@ -56,3 +56,42 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+.comment-modal {
+  width: 450px;
+  max-height: 80vh;
+  background: #0f172a;          /* dark background */
+  color: #ffffff;              /* white text */
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background: #1e293b;         /* dark input */
+  color: #ffffff;              /* white text */
+}
+
+.comment-input input::placeholder {
+  color: #94a3b8;              /* visible placeholder */
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}

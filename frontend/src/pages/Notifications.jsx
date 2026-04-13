@@ -39,7 +39,18 @@ function Notifications() {
 
       {requests.map((r) => (
         <div key={r.id} className="notif-card">
-          <img src={r.requester_image} alt="avatar" />
+          <img
+  src={
+    r.requester_image
+      ? `http://127.0.0.1:5000${r.requester_image}`
+      : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+  }
+  alt="avatar"
+  onError={(e) =>
+    (e.target.src =
+      "https://cdn-icons-png.flaticon.com/512/149/149071.png")
+  }
+/>
 
           <div className="notif-info">
             <strong>{r.requester_name}</strong>

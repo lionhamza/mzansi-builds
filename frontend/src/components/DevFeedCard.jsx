@@ -6,6 +6,7 @@ import collaborateIcon from "../assets/icons/collaborate.png";
 import requestedIcon from "../assets/icons/requested.png";
 import starIcon from "../assets/icons/star.png";
 import starredIcon from "../assets/icons/icons8-star-50.png";
+import commentIcon from "../assets/icons/comment.png";
 
 function DevFeedCard({ post }) {
   const savedUser = JSON.parse(localStorage.getItem("user"));
@@ -153,8 +154,13 @@ function DevFeedCard({ post }) {
         </span>
 
         <span className="comment-btn" onClick={() => setShowComments(true)}>
-          💬 Comment
-        </span>
+  <img
+    src={commentIcon}
+    alt="comment"
+    className="comment-icon"
+  />
+  Comment
+</span>
 
         <span
           className={`collab-btn ${isCollaborating ? "requested" : ""}`}

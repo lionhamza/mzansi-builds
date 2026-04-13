@@ -41,10 +41,18 @@ function MainLayout() {
           <NavLink to={`/profile/${user?.id}`} className="profile-link">
             <span>View Profile</span>
             <img
-              src="https://i.pravatar.cc/30"
-              alt="profile"
-              className="sidebar-avatar"
-            />
+  src={
+    user?.profile_image
+      ? `http://127.0.0.1:5000${user.profile_image}`
+      : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+  }
+  alt="profile"
+  className="sidebar-avatar"
+  onError={(e) =>
+    (e.target.src =
+      "https://cdn-icons-png.flaticon.com/512/149/149071.png")
+  }
+/>
           </NavLink>
 
           <NavLink to="/notifications" className="notification-link">
