@@ -103,7 +103,18 @@ function DevFeedCard({ post }) {
     <div className="dev-card">
       <div className="dev-card-header">
         <div className="dev-user">
-          <img src={post.user.profile_image} alt="avatar" />
+          <img
+  src={
+    post.user?.profile_image
+      ? `http://127.0.0.1:5000${post.user.profile_image}`
+      : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+  }
+  alt="avatar"
+  onError={(e) =>
+    (e.target.src =
+      "https://cdn-icons-png.flaticon.com/512/149/149071.png")
+  }
+/>
           <div className="dev-user-info">
             <strong>{post.user.full_name}</strong>
             <span className="time">

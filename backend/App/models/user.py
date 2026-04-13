@@ -8,7 +8,12 @@ class User(db.Model):
     full_name = db.Column(db.String(200))
     email = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200))
-    profile_image = db.Column(db.String(500))
+
+    # ✅ DEFAULT IMAGE HERE
+    profile_image = db.Column(
+        db.String(500),
+        default="/static/profile_images/default.png"
+    )
 
     # relationships
     projects = db.relationship(

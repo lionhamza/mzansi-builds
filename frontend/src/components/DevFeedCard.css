@@ -264,3 +264,40 @@
 .collab-btn.requested .collab-icon {
   transform: scale(1.15);
 }
+
+.avatar-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00ff88;
+}
+
+.edit-avatar {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: #00ff88;
+  color: black;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  border: 2px solid #0f141a;
+  transition: 0.2s;
+}
+
+.edit-avatar:hover {
+  transform: scale(1.1);
+}

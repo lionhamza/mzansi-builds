@@ -24,12 +24,17 @@ function CelebrationWall() {
             {/* Header */}
             <div className="celebration-header">
               <img
-                src={
-                  p.user?.profile_image ||
-                  "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                }
-                alt=""
-              />
+  src={
+    p.user?.profile_image
+      ? `http://127.0.0.1:5000${p.user.profile_image}`
+      : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+  }
+  alt=""
+  onError={(e) =>
+    (e.target.src =
+      "https://cdn-icons-png.flaticon.com/512/149/149071.png")
+  }
+/>
               <div>
                 <h4>{p.user?.full_name || "Developer"}</h4>
                 <small>
