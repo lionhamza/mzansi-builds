@@ -83,3 +83,14 @@
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 255, 136, 0.15);
 }
+
+.read-more {
+  color: #00ff88;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}

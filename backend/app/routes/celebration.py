@@ -24,6 +24,7 @@ def celebration_wall():
             "description": p.description,
             "tech_stack": p.tech_stack,
             "created_at": p.created_at.isoformat(),
+            "github_link": p.github_link,  # ✅ ADD THIS
             "user": {
                 "full_name": p.user.full_name,
                 "profile_image": p.user.profile_image

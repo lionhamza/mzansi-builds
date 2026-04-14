@@ -1,7 +1,7 @@
 import "./DevFeedCard.css";
 import { useState, useEffect } from "react";
 import CommentModal from "./CommentModal";
-
+import { FaGithub } from "react-icons/fa";
 import collaborateIcon from "../assets/icons/collaborate.png";
 import requestedIcon from "../assets/icons/requested.png";
 import starIcon from "../assets/icons/star.png";
@@ -19,7 +19,15 @@ function DevFeedCard({ post }) {
   const [loadingStar, setLoadingStar] = useState(false);
 
   const [showComments, setShowComments] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
+  const MAX_CHARS = 180;
+
+  const isLong = post.message.length > MAX_CHARS;
+
+  const displayedText = expanded
+  ? post.message
+  : post.message.slice(0, MAX_CHARS) + (isLong ? "..." : "");
   useEffect(() => {
     if (!savedUser) return;
 
@@ -134,13 +142,35 @@ function DevFeedCard({ post }) {
             : "🚀 Progress Update"}
         </h4>
 
-        <p>{post.message}</p>
+        <p className="post-message">
+  {displayedText}
+
+  {isLong && (
+    <span
+      className="read-more"
+      onClick={() => setExpanded(!expanded)}
+    >
+      {expanded ? " Read less" : " Read more"}
+    </span>
+  )}
+</p>
 
         <div className="tech-row">
           {post.project.tech_stack?.split(",").map((tech, i) => (
             <span key={i}>{tech.trim()}</span>
           ))}
         </div>
+        {post.project?.github_link && (
+  <a
+    href={post.project.github_link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="github-link"
+  >
+    <FaGithub className="github-icon" />
+      View Repository
+  </a>
+)}
       </div>
 
       <div className="dev-card-footer">
@@ -162,21 +192,21 @@ function DevFeedCard({ post }) {
   Comment
 </span>
 
-        <span
-          className={`collab-btn ${isCollaborating ? "requested" : ""}`}
-          onClick={handleCollaborateToggle}
-        >
-          <img
-            src={isCollaborating ? requestedIcon : collaborateIcon}
-            alt="collab"
-            className="collab-icon"
-          />
-          {loadingCollab
-            ? "Loading..."
-            : isCollaborating
-            ? "Requested"
-            : "Collaborate"}
-        </span>
+        <div
+  className={`collab-btn ${isCollaborating ? "requested" : ""}`}
+  onClick={handleCollaborateToggle}
+>
+  <img
+    src={isCollaborating ? requestedIcon : collaborateIcon}
+    alt="collab"
+    className="collab-icon"
+  />
+  {loadingCollab
+    ? "Loading..."
+    : isCollaborating
+    ? "Requested"
+    : "Collaborate"}
+</div>
       </div>
 
       {showComments && (

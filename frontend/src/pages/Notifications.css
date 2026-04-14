@@ -98,3 +98,9 @@
 .decline-btn:hover {
   background: #2a3646;
 }
+
+.completed-actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+}

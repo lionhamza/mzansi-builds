@@ -144,116 +144,6 @@
   margin-top: 14px;
 }
 
-/* 🎉 CELEBRATION OVERLAY */
-.celebration-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  animation: fadeIn 0.4s ease;
-}
-
-.celebration-content {
-  text-align: center;
-  color: white;
-  animation: pop 0.6s ease;
-}
-
-.celebration-content h1 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
-
-.celebration-content p {
-  color: #00ff88;
-  font-size: 18px;
-}
-
-/* 🎊 Confetti effect */
-.confetti {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image:
-    radial-gradient(circle, #00ff88 3px, transparent 3px),
-    radial-gradient(circle, #ffffff 3px, transparent 3px),
-    radial-gradient(circle, #ff00ff 3px, transparent 3px);
-  background-size: 80px 80px;
-  animation: confettiMove 3s linear infinite;
-  opacity: 0.4;
-}
-
-/* Animations */
-@keyframes confettiMove {
-  from { background-position: 0 0, 40px 40px, 20px 60px; }
-  to { background-position: 0 600px, 40px 640px, 20px 660px; }
-}
-
-@keyframes pop {
-  0% { transform: scale(0.6); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.github-link {
-  display: inline-block;
-  margin-bottom: 16px;
-  padding: 8px 12px;
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  color: #ccced1;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-  transition: 0.2s ease;
-}
-
-.github-link:hover {
-  border-color: #00ff88;
-  color: #00ff88;
-  transform: translateY(-2px);
-}
-
-.completed-badge {
-  background: #0b3d2e;
-  color: #00ff88;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.github-link-btn {
-  text-decoration: none;
-  background: #1f2a37;
-  color: #00ff88;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: 700;
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-}
-
-.view-updates-btn {
-  margin-top: 10px;
-  background: #1f2a37;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-
 /* STATUS + EDIT PEN */
 .status-section {
   display: flex;
@@ -303,6 +193,7 @@
   border-radius: 10px;
 }
 
+/* GitHub Button — black, white text, green hover */
 .github-pro-btn {
   display: inline-flex;
   align-items: center;
@@ -313,16 +204,38 @@
   font-weight: 600;
   font-size: 14px;
 
-  background: #0f141a;
-  border: 1px solid #1f2a37;
-  color: #e6edf3;
+  background: #000000;      /* black */
+  color: #ffffff;           /* white text */
+  border: 1px solid #2b2b2b;
 
   transition: all 0.25s ease;
 }
 
 .github-pro-btn:hover {
+  background: #0b3d2e;      /* dark green background */
+  border-color: #00ff88;
+  color: #00ff88;           /* green text */
   transform: translateY(-2px);
-  border-color: #2ecc71;
-  box-shadow: 0 0 12px rgba(46, 204, 113, 0.3);
-  color: #2ecc71;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.35);
+}
+
+.github-icon {
+  font-size: 18px;
+}
+
+.readmore-text {
+  color: #c9d1d9;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.readmore-toggle {
+  color: #00ff88;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.readmore-toggle:hover {
+  text-decoration: underline;
 }

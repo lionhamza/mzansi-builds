@@ -1,6 +1,31 @@
 import { useEffect, useState } from "react";
+import { FaGithub } from "react-icons/fa";
 import "./myprojects.css";
 
+function ReadMore({ text, maxChars = 140 }) {
+  const [expanded, setExpanded] = useState(false);
+
+  if (!text) return null;
+
+  const isLong = text.length > maxChars;
+  const displayText = expanded || !isLong
+    ? text
+    : text.slice(0, maxChars) + "...";
+
+  return (
+    <p className="readmore-text">
+      {displayText}
+      {isLong && (
+        <span
+          className="readmore-toggle"
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded ? " Show less" : " Read more"}
+        </span>
+      )}
+    </p>
+  );
+}
 function MyProjects() {
   const [projects, setProjects] = useState([]);
   const [modal, setModal] = useState(null);
@@ -106,7 +131,7 @@ function MyProjects() {
             </div>
 
             <h3>{project.title}</h3>
-            <p>{project.description}</p>
+            <ReadMore text={project.description} />
 
             <div className="tech-stack">
               {project.tech_stack?.split(",").map((tech, i) => (
@@ -138,18 +163,21 @@ function MyProjects() {
                     ✅ Mark Completed
                   </button>
                 </>
-              ) : (
-                project.github_link && (
-                  <a
-                    href={project.github_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="github-pro-btn"
-                  >
-                    Open Repository
-                  </a>
-                )
-              )}
+) : (
+  <div className="completed-actions">
+    {project.github_link && (
+      <a
+        href={project.github_link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="github-pro-btn"
+      >
+        <FaGithub className="github-icon" />
+        View Repository
+      </a>
+    )}
+  </div>
+)}
             </div>
           </div>
         ))}
