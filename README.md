@@ -43,10 +43,10 @@ I implemented the following core user journey requirements:
 - continuously update milestones and progress
 
 <p align="center">
-  <img src="screenshots/CreateProject1.png" width="32%" />
-  <img src="screenshots/ProjectCreated.png" width="32%" />
-  <img src="screenshots/projects.png" width="32%" />
-  <img src="screenshots/progressUpdate.png" width="32%" />
+  <img src="screenshots/CreateProject1.png" width="24%" />
+  <img src="screenshots/ProjectCreated.png" width="24%" />
+  <img src="screenshots/projects.png" width="24%" />
+  <img src="screenshots/progressUpdate.png" width="24%" />
 </p>
 
 
@@ -56,6 +56,12 @@ I implemented the following core user journey requirements:
 - collaboration request system
 - commenting and interaction
 - project starring functionality
+
+<p align="center">
+  <img src="screenshots/developerfeed" width="32%" />
+  <img src="screenshots/Collaboration-Request.png" width="32%" />
+  <img src="screenshots/comment.png" width="32%" />
+</p>
 
 ### Celebration Wall
 When a developer completes a project, the project is displayed on a celebration wall to showcase successful builds.
