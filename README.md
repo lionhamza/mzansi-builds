@@ -68,7 +68,7 @@ I implemented the following core user journey requirements:
 When a developer completes a project, the project is displayed on a celebration wall to showcase successful builds.
 
 <p align="center">
-  <img src="screenshots/Collaboration-Request.png" width="23%" />
+  <img src="screenshots/celebration-wall.png" width="23%" />
 </p>
 
 ---
