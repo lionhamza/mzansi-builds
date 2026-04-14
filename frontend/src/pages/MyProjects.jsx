@@ -231,9 +231,13 @@ function MyProjects() {
                   }
                 />
                 <div className="modal-buttons">
-                  <button onClick={saveEdit}>Save</button>
-                  <button onClick={closeModal}>Cancel</button>
-                </div>
+  <button className="modal-btn post-btn" onClick={saveEdit}>
+    Save
+  </button>
+  <button className="modal-btn cancel-btn" onClick={closeModal}>
+    Cancel
+  </button>
+</div>
               </>
             )}
 
@@ -250,9 +254,13 @@ function MyProjects() {
                   onChange={(e) => setMessage(e.target.value)}
                 />
                 <div className="modal-buttons">
-                  <button onClick={submitPost}>Post</button>
-                  <button onClick={closeModal}>Cancel</button>
-                </div>
+  <button className="modal-btn post-btn" onClick={submitPost}>
+    Post
+  </button>
+  <button className="modal-btn cancel-btn" onClick={closeModal}>
+    Cancel
+  </button>
+</div>
               </>
             )}
           </div>

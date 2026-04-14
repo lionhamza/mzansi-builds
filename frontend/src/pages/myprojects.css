@@ -286,3 +286,46 @@
   color: #000;
   border-color: #00ff88;
 }
+
+/* MODAL BUTTONS */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.modal-btn {
+  min-width: 110px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* PRIMARY BUTTON */
+.post-btn {
+  background: #00ff88;
+  color: #000;
+}
+
+.post-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(0, 255, 136, 0.35);
+}
+
+/* SECONDARY BUTTON */
+.cancel-btn {
+  background: #1a222c;
+  color: #ffffff;
+  border: 1px solid #2d3748;
+}
+
+.cancel-btn:hover {
+  background: #232d38;
+  border-color: #00ff88;
+  color: #00ff88;
+}
