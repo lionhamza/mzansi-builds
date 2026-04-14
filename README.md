@@ -26,9 +26,8 @@ I wanted the platform to encourage **community learning, collaboration,Communica
 
 I implemented the following core user journey requirements:
 <p align="center">
-  <img src="screenshots/SignIN.png" width="32%" />
-  <img src="screenshots/SignUp.png" width="32%" />
-  
+  <img src="screenshots/SignIn.png" width="32%" />
+  <img src="screenshots/SignUp.png" width="32%" /> 
 </p>
 ### Account Management
 - user registration
