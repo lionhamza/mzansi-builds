@@ -15,7 +15,7 @@ My goal with this project was to create a social collaboration platform for deve
 - share milestones and progress updates
 - request collaboration from other developers
 - support projects through starring
-- share messages on the Project Group for collaboration
+- share messages on the Project Chat Group as Collaborators
 - celebrate completed projects publicly
 
 I wanted the platform to encourage **community learning, collaboration, and visibility of ongoing developer work**.
