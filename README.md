@@ -58,7 +58,7 @@ I implemented the following core user journey requirements:
 - project starring functionality
 
 <p align="center">
-  <img src="screenshots/developerfeed" width="32%" />
+  <img src="screenshots/developerfeed.png" width="32%" />
   <img src="screenshots/Collaboration-Request.png" width="32%" />
   <img src="screenshots/comment.png" width="32%" />
 </p>
