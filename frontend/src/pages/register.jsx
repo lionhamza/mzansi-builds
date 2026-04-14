@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "../index.css";
 import mzansiIcon from "../../image/MzansiBuil-logo.png";
 
@@ -72,6 +73,10 @@ function Register() {
         </form>
 
         {message && <p className="auth-message">{message}</p>}
+
+        <p className="auth-link">
+          Already have an account? <Link to="/">Back to Login</Link>
+        </p>
       </div>
     </div>
   );
