@@ -31,11 +31,25 @@ I implemented the following core user journey requirements:
 - user login and authentication
 - session-based access control
 
+<p align="center">
+  <img src="screenshots/SignIn.png" width="32%" />
+  <img src="screenshots/SignUp.png" width="32%" /> 
+</p>
+
 ### Project Management
 - create new project entries
 - add project stage
 - specify support required
 - continuously update milestones and progress
+
+<p align="center">
+  <img src="screenshots/CreateProject1.png" width="32%" />
+  <img src="screenshots/ProjectCreated.png" width="32%" />
+  <img src="screenshots/projects.png" width="32%" />
+  <img src="screenshots/progressUpdate.png" width="32%" />
+</p>
+
+
 
 ### Collaboration Features
 - live feed of developer activity
