@@ -57,6 +57,12 @@ I implemented the following core user journey requirements:
 - commenting and interaction
 - project starring functionality
 
+<p align="center">
+  <img src="screenshots/developerfeed" width="32%" />
+  <img src="screenshots/Collaboration-Request.png" width="32%" />
+  <img src="screenshots/comment.png" width="32%" />
+</p>
+
 ### Celebration Wall
 When a developer completes a project, the project is displayed on a celebration wall to showcase successful builds.
 
