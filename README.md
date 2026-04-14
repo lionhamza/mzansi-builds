@@ -84,6 +84,7 @@ Below is the UML class diagram I created during the planning phase.
 - CollaborationRequest
 - ProjectStar
 - Project Masseges
+  
 I created this UML before implementation to help me plan the system architecture and database relationships properly.
 
 ---
