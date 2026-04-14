@@ -2,29 +2,27 @@
 
 I developed **MzansiBuilds** as part of the **Derivco Code Skills Challenge 2026**.
 
-This platform is designed to help developers **build in public**, share their progress, collaborate with others, and celebrate completed projects.
+This platform enables developers to **build in public**, share progress, collaborate with others, and celebrate completed projects.
 
 ---
 
 ## Project Overview
 
-My goal with this project was to create a social collaboration platform for developers where users can:
+The goal of this project was to design a social collaboration platform where developers can:
 
-- create and manage their own accounts
+- create and manage accounts
 - start and manage projects
 - share milestones and progress updates
 - request collaboration from other developers
 - support projects through starring
-- share messages on the Project Chat Group as Collaborators
+- communicate through a project group chat as collaborators
 - celebrate completed projects publicly
 
-I wanted the platform to encourage **community learning, collaboration,Communication and visibility of ongoing developer work**.
+The platform encourages **community learning, collaboration, communication, and visibility of ongoing developer work**.
 
 ---
 
 ## User Journey Requirements Implemented
-
-I implemented the following core user journey requirements:
 
 ### Account Management
 - user registration
@@ -38,8 +36,8 @@ I implemented the following core user journey requirements:
 
 ### Project Management
 - create new project entries
-- add project stage
-- specify support required
+- define project stage
+- specify required support
 - continuously update milestones and progress
 
 <p align="center">
@@ -49,13 +47,12 @@ I implemented the following core user journey requirements:
   <img src="screenshots/progressUpdate.png" width="24%" />
 </p>
 
-
-
 ### Collaboration Features
 - live feed of developer activity
 - collaboration request system
 - commenting and interaction
 - project starring functionality
+- project group chat for accepted collaborators
 
 <p align="center">
   <img src="screenshots/developerfeed.png" width="24%" />
@@ -65,7 +62,7 @@ I implemented the following core user journey requirements:
 </p>
 
 ### Celebration Wall
-When a developer completes a project, the project is displayed on a celebration wall to showcase successful builds.
+Completed projects are displayed on a celebration wall to showcase successful builds.
 
 <p align="center">
   <img src="screenshots/celebration-wall.png" width="23%" />
@@ -88,7 +85,7 @@ When a developer completes a project, the project is displayed on a celebration 
 ### Database
 - PostgreSQL
 
-I chose :contentReference[oaicite:0]{index=0} because I wanted a robust relational database system that supports scalable data modeling and strong relationship handling through foreign keys.
+I chose PostgreSQL for its strong relational capabilities and support for structured data relationships using foreign keys.
 
 ### Version Control
 - Git
@@ -96,43 +93,44 @@ I chose :contentReference[oaicite:0]{index=0} because I wanted a robust relation
 
 ---
 
-## My System Architecture / UML Design
+## System Architecture / UML Design
 
-Below is the UML class diagram I created during the planning phase.
+Below is the UML class diagram created during the planning phase.
 
 ![UML Diagram](screenshots/MzansiBuild-UML-MadiHP.png)
 
-**Figure 1:** My UML class diagram showing the relationships between:
+**Figure 1:** UML class diagram showing relationships between:
 
 - User
 - Project
 - Post
 - CollaborationRequest
 - ProjectStar
-- Project Messeges
-  
-I created this UML before implementation to help me plan the system architecture and database relationships properly.
+- ProjectMessage
+
+This UML was created before implementation to guide the database and system structure.
 
 ---
 
 ## Database Design
 
-I implemented the backend database using PostgreSQL.
+The backend database was implemented using PostgreSQL.
 
-Some of the key relationships I designed include:
+Key relationships include:
 
 - one user can own many projects
 - one project can contain many progress posts
 - many users can star many projects
 - collaboration requests connect developers to project owners
+- project messages allow communication between collaborators
 
-This was implemented using SQLAlchemy ORM models.
+These relationships were implemented using SQLAlchemy ORM models.
 
 ---
 
-## My Software Engineering Best Practices
+## Software Engineering Best Practices
 
-Throughout the development process, I followed software engineering best practices such as:
+During development, the following best practices were applied:
 
 - modular component design
 - reusable frontend components
@@ -146,18 +144,13 @@ Throughout the development process, I followed software engineering best practic
 
 ## CI / CD Workflow
 
-Below is my CI / CD workflow evidence.
-
 ![CI/CD Pipeline](./screenshots/github-actions.png)
 
-I used continuous integration principles to support code validation and automated workflow checks during development.
+Continuous integration principles were used to support code validation and workflow checks during development.
 
 ---
 
-
 ## Testing & Code Quality
-
-Below is evidence of my testing and validation workflow.
 
 <p align="center">
   <img src="screenshots/session-problem.png" width="32%" />
@@ -165,22 +158,19 @@ Below is evidence of my testing and validation workflow.
   <img src="screenshots/After-Debugging.png" width="32%" />
 </p>
 
-To ensure code quality and reliability, testing and validation were considered for:
+Testing and validation focused on:
 
-* authentication route validation and session handling
-* project creation and update routes
-* collaboration request and notification logic
-* comment and star (like) functionality
-* frontend interaction flows with backend APIs
+- authentication and session handling
+- project creation and update routes
+- collaboration request and notification logic
+- comment and star functionality
+- frontend and backend interaction flows
 
-This reflects a focus on writing maintainable code supported by verification, version control discipline, and workflow checks.
-
+---
 
 ## Security Considerations
 
-I treated security as an important part of the development process.
-
-Security measures I considered include:
+Security was integrated into the design process through:
 
 - protected authentication routes
 - session management
@@ -189,34 +179,26 @@ Security measures I considered include:
 - access control checks
 - safe database operations
 
-I ensured that security was part of the design process and not an afterthought.
-
 ---
 
-## My Git Workflow & Version Control
-
-Below is my Git workflow evidence.
+## Git Workflow & Version Control
 
 ![Git History](./screenshots/git-history.png)
 
-I followed an incremental Git workflow with commits such as:
+An incremental Git workflow was followed with structured commits such as:
 
-- initial project setup
+- initial setup
 - authentication implementation
 - project feed development
-- collaboration request feature
+- collaboration feature implementation
 - star functionality
 - UI improvements
-
-This demonstrates my use of version control and structured development.
 
 ---
 
 ## Reusability and Documentation
 
-I designed the project with reusability in mind.
-
-Examples include:
+The project was designed with reusability in mind through:
 
 - reusable React components
 - reusable Flask routes
@@ -224,23 +206,21 @@ Examples include:
 - shared utility functions
 - maintainable folder structure
 
-I also documented my thought process through this README and UML design.
+Documentation includes this README and the UML design.
 
 ---
 
 ## Evidence of My Own Thinking
 
-This project reflects my own thinking and methodology through:
+This project demonstrates:
 
 - requirement analysis
 - project planning
 - UML design
-- architecture decisions
+- architectural decisions
 - security considerations
 - testing workflow
-- version control discipline
-
-This demonstrates my software engineering approach in alignment with the challenge requirements.
+- disciplined version control
 
 ---
 
