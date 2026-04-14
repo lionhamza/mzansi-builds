@@ -32,6 +32,7 @@ The platform encourages **community learning, collaboration, communication, and 
 <p align="center">
   <img src="screenshots/SignIn.png" width="32%" />
   <img src="screenshots/SignUp.png" width="32%" /> 
+  <img src="screenshots/profile.png" width="32%" /> 
 </p>
 
 ### Project Management
