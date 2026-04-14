@@ -127,22 +127,27 @@ I used continuous integration principles to support code validation and automate
 
 ---
 
+
 ## Testing & Code Quality
 
-Below is evidence of my testing workflow.
+Below is evidence of my testing and validation workflow.
 
-![Tests Passing](./screenshots/tests.png)
+<p align="center">
+  <img src="screenshots/session-problem.png" width="32%" />
+  <img src="screenshots/testing.png" width="32%" />
+  <img src="screenshots/After-Debugging.png" width="32%" />
+</p>
 
-To ensure code quality, I considered testing for:
+To ensure code quality and reliability, testing and validation were considered for:
 
-- authentication route validation
-- project creation route testing
-- collaboration request logic
-- frontend interaction flows
+* authentication route validation and session handling
+* project creation and update routes
+* collaboration request and notification logic
+* comment and star (like) functionality
+* frontend interaction flows with backend APIs
 
-This demonstrates my focus on writing clean and maintainable code.
+This reflects a focus on writing maintainable code supported by verification, version control discipline, and workflow checks.
 
----
 
 ## Security Considerations
 
