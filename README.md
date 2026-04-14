@@ -29,6 +29,7 @@ I implemented the following core user journey requirements:
   <img src="screenshots/SignIn.png" width="32%" />
   <img src="screenshots/SignUp.png" width="32%" /> 
 </p>
+
 ### Account Management
 - user registration
 - user login and authentication
