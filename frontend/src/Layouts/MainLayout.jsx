@@ -37,7 +37,7 @@ function MainLayout() {
           <NavLink to="/my-projects">Projects</NavLink>
           <NavLink to="/create-project">Create Project</NavLink>
           <NavLink to="/celebration-wall">Celebration Wall</NavLink>
-
+          <NavLink to="/messages">Messages</NavLink>
           <NavLink to={`/profile/${user?.id}`} className="profile-link">
             <span>View Profile</span>
             <img

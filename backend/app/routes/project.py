@@ -4,7 +4,7 @@ from app.models.project import Project
 from app.models.post import Post
 from app.models.collaborationrequest import CollaborationRequest
 from app.models.comment import Comment
-
+from app.models.ProjectMessage import ProjectMessage
 
 project_bp = Blueprint("project", __name__)
 
@@ -375,3 +375,81 @@ def projects_filter(user_id):
         "mine": [serialize(p) for p in my_projects],
         "collaborating": [serialize(p) for p in collab_projects],
     })
+
+# ================== PROJECT GROUP CHAT ==================
+
+def user_is_in_project(project_id, user_id):
+    project = Project.query.get(project_id)
+
+    # Owner
+    if project.user_id == user_id:
+        return True
+
+    # Accepted collaborator
+    collab = CollaborationRequest.query.filter_by(
+        project_id=project_id,
+        requester_id=user_id,
+        status="accepted"
+    ).first()
+
+    return collab is not None
+
+
+@project_bp.route("/project-chat-allowed/<int:project_id>/<int:user_id>")
+def project_chat_allowed(project_id, user_id):
+    accepted = CollaborationRequest.query.filter_by(
+        project_id=project_id,
+        status="accepted"
+    ).count()
+
+    team_size = 1 + accepted  # owner + collaborators
+
+    allowed = team_size >= 2 and user_is_in_project(project_id, user_id)
+
+    return jsonify({"allowed": allowed})
+
+
+@project_bp.route("/project-chat/<int:project_id>/<int:user_id>")
+def get_project_chat(project_id, user_id):
+    if not user_is_in_project(project_id, user_id):
+        return jsonify({"error": "Not allowed"}), 403
+
+    messages = ProjectMessage.query.filter_by(
+        project_id=project_id
+    ).order_by(ProjectMessage.created_at.asc()).all()
+
+    return jsonify([
+        {
+            "id": m.id,
+            "message": m.message,
+            "created_at": m.created_at.isoformat(),
+            "user": {
+                "id": m.user.id,                 # ✅ ADD THIS LINE
+                "name": m.user.full_name,
+                "image": m.user.profile_image
+            }
+        }
+        for m in messages
+    ])
+
+@project_bp.route("/send-project-message", methods=["POST"])
+def send_project_message():
+    data = request.get_json()
+
+    project_id = data["project_id"]
+    user_id = data["user_id"]
+    message = data["message"]
+
+    if not user_is_in_project(project_id, user_id):
+        return jsonify({"error": "Not allowed"}), 403
+
+    msg = ProjectMessage(
+        project_id=project_id,
+        user_id=user_id,
+        message=message
+    )
+
+    db.session.add(msg)
+    db.session.commit()
+
+    return jsonify({"message": "sent"}), 201
