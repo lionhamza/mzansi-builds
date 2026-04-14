@@ -43,10 +43,10 @@ I implemented the following core user journey requirements:
 - continuously update milestones and progress
 
 <p align="center">
-  <img src="screenshots/CreateProject1.png" width="32%" />
-  <img src="screenshots/ProjectCreated.png" width="32%" />
-  <img src="screenshots/projects.png" width="32%" />
-  <img src="screenshots/progressUpdate.png" width="32%" />
+  <img src="screenshots/CreateProject1.png" width="30%" />
+  <img src="screenshots/ProjectCreated.png" width="30%" />
+  <img src="screenshots/projects.png" width="30%" />
+  <img src="screenshots/progressUpdate.png" width="30%" />
 </p>
 
 
