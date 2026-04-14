@@ -58,13 +58,18 @@ I implemented the following core user journey requirements:
 - project starring functionality
 
 <p align="center">
-  <img src="screenshots/developerfeed.png" width="32%" />
-  <img src="screenshots/Collaboration-Request.png" width="32%" />
-  <img src="screenshots/comment.png" width="32%" />
+  <img src="screenshots/developerfeed.png" width="24%" />
+  <img src="screenshots/Collaboration-Request.png" width="24%" />
+  <img src="screenshots/messages.png" width="24%" />
+  <img src="screenshots/comment.png" width="24%" />
 </p>
 
 ### Celebration Wall
 When a developer completes a project, the project is displayed on a celebration wall to showcase successful builds.
+
+<p align="center">
+  <img src="screenshots/Collaboration-Request.png" width="23%" />
+</p>
 
 ---
 
