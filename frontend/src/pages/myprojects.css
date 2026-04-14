@@ -239,3 +239,50 @@
 .readmore-toggle:hover {
   text-decoration: underline;
 }
+
+/* TOP FILTER BAR */
+.top-filter {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.top-filter button {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 1px solid #1f2a37;
+  background: #0f141a;
+  color: #8b949e;
+  cursor: pointer;
+  transition: 0.25s;
+  font-weight: 600;
+}
+
+.top-filter button.active {
+  background: #00ff88;
+  color: #000;
+  border-color: #00ff88;
+}
+
+.top-filter {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.top-filter button {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 1px solid #1f2a37;
+  background: #0f141a;
+  color: #8b949e;
+  cursor: pointer;
+  transition: 0.25s;
+  font-weight: 600;
+}
+
+.top-filter button.active {
+  background: #00ff88;
+  color: #000;
+  border-color: #00ff88;
+}

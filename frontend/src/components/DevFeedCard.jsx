@@ -10,7 +10,7 @@ import commentIcon from "../assets/icons/comment.png";
 
 function DevFeedCard({ post }) {
   const savedUser = JSON.parse(localStorage.getItem("user"));
-
+  
   const [isCollaborating, setIsCollaborating] = useState(false);
   const [isStarred, setIsStarred] = useState(false);
   const [starCount, setStarCount] = useState(0);

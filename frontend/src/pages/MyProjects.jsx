@@ -4,13 +4,11 @@ import "./myprojects.css";
 
 function ReadMore({ text, maxChars = 140 }) {
   const [expanded, setExpanded] = useState(false);
-
   if (!text) return null;
 
   const isLong = text.length > maxChars;
-  const displayText = expanded || !isLong
-    ? text
-    : text.slice(0, maxChars) + "...";
+  const displayText =
+    expanded || !isLong ? text : text.slice(0, maxChars) + "...";
 
   return (
     <p className="readmore-text">
@@ -26,24 +24,27 @@ function ReadMore({ text, maxChars = 140 }) {
     </p>
   );
 }
+
 function MyProjects() {
-  const [projects, setProjects] = useState([]);
+  const [allData, setAllData] = useState({ mine: [], collaborating: [] });
+  const [filter, setFilter] = useState("mine");
+
   const [modal, setModal] = useState(null);
   const [message, setMessage] = useState("");
   const [editData, setEditData] = useState({});
   const [celebrate, setCelebrate] = useState(false);
 
-  // ✅ FIXED — correct API call with user id
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
+  useEffect(() => {
     if (!user) return;
 
-    fetch(`http://localhost:5000/my-projects/${user.id}`)
+    fetch(`http://localhost:5000/projects-filter/${user.id}`)
       .then((res) => res.json())
-      .then((data) => setProjects(data))
-      .catch((err) => console.error("Error loading projects:", err));
+      .then((data) => setAllData(data));
   }, []);
+
+  const projects = allData[filter];
 
   const openModal = (project, type) => {
     if (type === "edit") setEditData(project);
@@ -56,8 +57,6 @@ function MyProjects() {
   };
 
   const submitPost = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
     fetch("http://localhost:5000/create-post", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -67,9 +66,7 @@ function MyProjects() {
         user_id: user.id,
         project_id: modal.projectId,
       }),
-    })
-      .then((res) => res.json())
-      .then(() => closeModal());
+    }).then(() => closeModal());
   };
 
   const saveEdit = () => {
@@ -78,11 +75,12 @@ function MyProjects() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editData),
     }).then(() => {
-      setProjects((prev) =>
-        prev.map((p) =>
+      setAllData((prev) => ({
+        ...prev,
+        [filter]: prev[filter].map((p) =>
           p.id === modal.projectId ? { ...p, ...editData } : p
-        )
-      );
+        ),
+      }));
       closeModal();
     });
   };
@@ -92,18 +90,34 @@ function MyProjects() {
       method: "PUT",
     }).then(() => {
       setCelebrate(true);
-      setProjects((prev) =>
-        prev.map((p) =>
+      setAllData((prev) => ({
+        ...prev,
+        [filter]: prev[filter].map((p) =>
           p.id === id ? { ...p, status: "Completed" } : p
-        )
-      );
+        ),
+      }));
       setTimeout(() => setCelebrate(false), 3500);
     });
   };
 
   return (
     <div className="projects-page">
-      <h2 className="page-title">My Projects</h2>
+      <h2 className="page-title">Projects</h2>
+
+      <div className="top-filter">
+        <button
+          className={filter === "mine" ? "active" : ""}
+          onClick={() => setFilter("mine")}
+        >
+          My Projects
+        </button>
+        <button
+          className={filter === "collaborating" ? "active" : ""}
+          onClick={() => setFilter("collaborating")}
+        >
+          Collaborating On
+        </button>
+      </div>
 
       <div className="projects-grid">
         {projects.map((project) => (
@@ -114,7 +128,7 @@ function MyProjects() {
                   {project.status}
                 </span>
 
-                {project.status !== "Completed" && (
+                {project.status !== "Completed" && filter === "mine" && (
                   <div
                     className="edit-pen"
                     onClick={() => openModal(project, "edit")}
@@ -139,8 +153,9 @@ function MyProjects() {
               ))}
             </div>
 
+            {/* ✅ ACTIONS FOR BOTH VIEWS */}
             <div className="project-actions">
-              {project.status !== "Completed" ? (
+              {filter === "mine" && project.status !== "Completed" && (
                 <>
                   <button
                     className="action-btn progress"
@@ -163,21 +178,22 @@ function MyProjects() {
                     ✅ Mark Completed
                   </button>
                 </>
-) : (
-  <div className="completed-actions">
-    {project.github_link && (
-      <a
-        href={project.github_link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="github-pro-btn"
-      >
-        <FaGithub className="github-icon" />
-        View Repository
-      </a>
-    )}
-  </div>
-)}
+              )}
+
+              {/* ✅ Visible to owner AND collaborators */}
+              {project.github_link && (
+                <div className="completed-actions">
+                  <a
+                    href={project.github_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="github-pro-btn"
+                  >
+                    <FaGithub className="github-icon" />
+                    View Repository
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -189,7 +205,6 @@ function MyProjects() {
             {modal.type === "edit" && (
               <>
                 <h3>Edit Project</h3>
-
                 <input
                   value={editData.title || ""}
                   onChange={(e) =>
@@ -215,7 +230,6 @@ function MyProjects() {
                     setEditData({ ...editData, github_link: e.target.value })
                   }
                 />
-
                 <div className="modal-buttons">
                   <button onClick={saveEdit}>Save</button>
                   <button onClick={closeModal}>Cancel</button>
@@ -230,13 +244,11 @@ function MyProjects() {
                     ? "Ask for Help"
                     : "Post Progress Update"}
                 </h3>
-
                 <textarea
                   placeholder="Write here..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                 />
-
                 <div className="modal-buttons">
                   <button onClick={submitPost}>Post</button>
                   <button onClick={closeModal}>Cancel</button>

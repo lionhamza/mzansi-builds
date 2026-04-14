@@ -347,3 +347,31 @@ def add_comment():
         }
     }), 201
 
+@project_bp.route("/projects-filter/<int:user_id>")
+def projects_filter(user_id):
+    # My own projects
+    my_projects = Project.query.filter_by(user_id=user_id).all()
+
+    # Projects where I am accepted collaborator
+    collabs = CollaborationRequest.query.filter_by(
+        requester_id=user_id,
+        status="accepted"
+    ).all()
+
+    collab_projects = [c.project for c in collabs]
+
+    def serialize(p):
+        return {
+            "id": p.id,
+            "title": p.title,
+            "description": p.description,
+            "tech_stack": p.tech_stack,
+            "status": p.status,
+            "created_at": p.created_at.isoformat(),
+            "github_link": p.github_link,
+        }
+
+    return jsonify({
+        "mine": [serialize(p) for p in my_projects],
+        "collaborating": [serialize(p) for p in collab_projects],
+    })

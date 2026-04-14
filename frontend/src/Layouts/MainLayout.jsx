@@ -34,7 +34,7 @@ function MainLayout() {
 
         <nav>
           <NavLink to="/feed">Developer Feed</NavLink>
-          <NavLink to="/my-projects">My Projects</NavLink>
+          <NavLink to="/my-projects">Projects</NavLink>
           <NavLink to="/create-project">Create Project</NavLink>
           <NavLink to="/celebration-wall">Celebration Wall</NavLink>
 
