@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./CommentModal.css";
 
 function CommentModal({ postId, onClose }) {
   const [comments, setComments] = useState([]);
   const [message, setMessage] = useState("");
+  const bottomRef = useRef(null);
 
   const loadComments = async () => {
     try {
@@ -22,6 +23,10 @@ function CommentModal({ postId, onClose }) {
   useEffect(() => {
     loadComments();
   }, [postId]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [comments]);
 
   const handleAddComment = async () => {
     if (!message.trim()) return;
@@ -50,33 +55,40 @@ function CommentModal({ postId, onClose }) {
     <div className="comment-overlay" onClick={onClose}>
       <div className="comment-modal" onClick={(e) => e.stopPropagation()}>
         
-        {/* HEADER WITH CANCEL */}
         <div className="comment-header">
           <h3>Comments</h3>
           <button className="close-btn" onClick={onClose}>×</button>
         </div>
 
         <div className="comment-list">
-          {comments.map((c) => (
-            <div key={c.id} className="comment-item">
-              <img
-                src={
-                  c.user?.profile_image
-                    ? `http://127.0.0.1:5000${c.user.profile_image}`
-                    : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                }
-                alt="avatar"
-                onError={(e) =>
-                  (e.target.src =
-                    "https://cdn-icons-png.flaticon.com/512/149/149071.png")
-                }
-              />
-              <div>
-                <strong>{c.user.full_name}</strong>
-                <p>{c.message}</p>
+          {comments.map((c) => {
+            const time = new Date(c.created_at).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+            return (
+              <div key={c.id} className="comment-item">
+                <img
+                  src={
+                    c.user?.profile_image
+                      ? `http://127.0.0.1:5000${c.user.profile_image}`
+                      : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                  }
+                  alt=""
+                />
+
+                <div className="comment-body">
+                  <div className="comment-top">
+                    <strong>{c.user.full_name}</strong>
+                    <span className="comment-time">{time}</span>
+                  </div>
+                  <div className="comment-text">{c.message}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
+          <div ref={bottomRef} />
         </div>
 
         <div className="comment-input">
@@ -84,6 +96,7 @@ function CommentModal({ postId, onClose }) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Write a comment..."
+            onKeyDown={(e) => e.key === "Enter" && handleAddComment()}
           />
           <button onClick={handleAddComment}>Post</button>
         </div>
